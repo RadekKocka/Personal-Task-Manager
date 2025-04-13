@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Personal_Task_Manager"
+        xmlns:viewModels="clr-namespace:Personal_Task_Manager.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
         Title="MainWindow" Height="832" Width="1280"
         WindowStartupLocation="CenterScreen">
@@ -14,5 +16,49 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="140"/>
         </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" 
+                x:Name="NavPanel" 
+                Background="{StaticResource NavPanelBackground}">
+
+        </Border>
+        <Border Grid.Column="1" 
+                x:Name="TaskList" 
+                Background="{StaticResource TaskListBackground}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Tasks" VerticalAlignment="Center" Margin="25 15" FontSize="22" FontWeight="Bold" />
+                <Border Grid.Row="1" CornerRadius="15" Background="{StaticResource WindowBackground}" Margin="20 0">
+                    <Grid>
+                        <TextBox BorderBrush="Transparent"
+                                 VerticalAlignment="Center" 
+                                 FontSize="20" 
+                                 Margin="8" 
+                                 Background="Transparent"
+                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                 Panel.ZIndex="1"
+                                 Style="{StaticResource TextBoxStyle}">
+                        </TextBox>
+                        <TextBlock FontSize="20"
+                                   Margin="11"
+                                   Background="Transparent"
+                                   Foreground="Gray"
+                                   Style="{StaticResource PlaceHolderTextStyle}">
+                        </TextBlock>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2" 
+                x:Name="TaskListDetails" 
+                Background="{StaticResource WindowBackground}"/>
+        <Border Grid.Column="3" 
+                x:Name="TaskStatus" 
+                Background="{StaticResource TaskStatusBackground}"/>
     </Grid>
 </Window>

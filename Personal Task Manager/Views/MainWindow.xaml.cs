@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Personal_Task_Manager.ViewModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,7 @@ namespace Personal_Task_Manager
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

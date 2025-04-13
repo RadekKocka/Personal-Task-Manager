@@ -8,6 +8,16 @@ namespace Personal_Task_Manager.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        private String searchText;
 
+        public String SearchText
+        {
+            get => searchText;
+            set
+            {
+                searchText = value;
+                OnPropertyChanged(nameof(SearchText));
+            }
+        }
     }
 }
