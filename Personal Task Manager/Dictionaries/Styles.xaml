@@ -6,6 +6,9 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource DefaultText}"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Triggers>
             <Trigger Property="IsFocused" Value="True">
                 <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
@@ -14,7 +17,13 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="PlaceHolderTextStyle">
+    <Style TargetType="TextBlock" x:Key="PlaceholderTextStyle">
+        <Style.Setters>
+            <Setter Property="Margin" Value="11"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style.Setters>
         <Style.Triggers>
             <DataTrigger Binding="{Binding SearchText}" Value="">
                 <Setter Property="Text" Value="Search..." />

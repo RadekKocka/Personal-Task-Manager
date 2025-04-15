@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Dictionaries/Colours.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Icons.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles.xaml"/>
+                <ResourceDictionary Source="Dictionaries/TaskItemStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

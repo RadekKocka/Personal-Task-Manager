@@ -1,13 +1,8 @@
 ﻿using Personal_Task_Manager.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Personal_Task_Manager.Models
 {
-    public class Task
+    public class TaskItem
     {
         public int Id { get; set; }
         public required string Title { get; set; }
@@ -19,6 +14,6 @@ namespace Personal_Task_Manager.Models
         public TaskState State{ get; set; }
         public TaskCategory Category { get; set; }
         public TaskImportance Importance { get; set; }
-        public List<Task> SubTasks { get; set; } = [];
+        public List<TaskItem> SubTasks { get; set; } = [];
     }
 }

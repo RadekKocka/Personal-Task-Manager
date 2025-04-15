@@ -32,28 +32,23 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Tasks" VerticalAlignment="Center" Margin="25 15" FontSize="22" FontWeight="Bold" />
-                <Border Grid.Row="1" CornerRadius="15" Background="{StaticResource WindowBackground}" Margin="20 0">
+                <TextBlock Grid.Row="0" Text="Tasks" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" />
+                <Border Grid.Row="1" CornerRadius="15" Background="{StaticResource WindowBackground}">
                     <Grid>
-                        <TextBox BorderBrush="Transparent"
-                                 VerticalAlignment="Center" 
-                                 FontSize="20" 
-                                 Margin="8" 
-                                 Background="Transparent"
-                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Panel.ZIndex="1"
-                                 Style="{StaticResource TextBoxStyle}">
-                        </TextBox>
-                        <TextBlock FontSize="20"
-                                   Margin="11"
-                                   Background="Transparent"
-                                   Foreground="Gray"
-                                   Style="{StaticResource PlaceHolderTextStyle}">
-                        </TextBlock>
+                                 Style="{StaticResource TextBoxStyle}"/>
+                        <TextBlock Style="{StaticResource PlaceHolderTextStyle}" />
                     </Grid>
+                </Border>
+                <Border Grid.Row="2">
+                    <ItemsControl ItemsSource="{Binding TasksView}"
+                                  ItemTemplate="{StaticResource TaskItemStyle}"/>
                 </Border>
             </Grid>
         </Border>
+
+
         <Border Grid.Column="2" 
                 x:Name="TaskListDetails" 
                 Background="{StaticResource WindowBackground}"/>
