@@ -7,11 +7,11 @@ namespace Personal_Task_Manager.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        private String searchText;
+        private string searchText;
         private ObservableCollection<TaskItem> tasks;
         private ICollectionView tasksView;
 
-        public String SearchText
+        public string SearchText
         {
             get => searchText;
             set

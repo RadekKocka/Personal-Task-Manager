@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Personal_Task_Manager"
         xmlns:viewModels="clr-namespace:Personal_Task_Manager.ViewModel"
+        xmlns:controls="clr-namespace:Personal_Task_Manager.Controls"
         d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
         Title="MainWindow" Height="832" Width="1280"
@@ -33,14 +34,13 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Tasks" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" />
-                <Border Grid.Row="1" CornerRadius="15" Background="{StaticResource WindowBackground}">
-                    <Grid>
-                        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                 Panel.ZIndex="1"
-                                 Style="{StaticResource TextBoxStyle}"/>
-                        <TextBlock Style="{StaticResource PlaceHolderTextStyle}" />
-                    </Grid>
-                </Border>
+                <controls:WatermarkTextBox Grid.Row="1" 
+                                           Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                           Watermark="Search..."
+                                           Height="35"
+                                           Margin="5 0"
+                                           FontSize="16"
+                                           Padding="5"/>
                 <Border Grid.Row="2">
                     <ItemsControl ItemsSource="{Binding TasksView}"
                                   ItemTemplate="{StaticResource TaskItemStyle}"/>
