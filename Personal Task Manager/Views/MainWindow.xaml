@@ -8,52 +8,57 @@
         xmlns:controls="clr-namespace:Personal_Task_Manager.Controls"
         d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="832" Width="1280"
+        Title="MainWindow"
+        Height="832"
+        Width="1280"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="435"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="435" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="140" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" 
-                x:Name="NavPanel" 
+        <Border Grid.Column="0"
+                x:Name="NavPanel"
                 Background="{StaticResource NavPanelBackground}">
-
         </Border>
-        <Border Grid.Column="1" 
-                x:Name="TaskList" 
+        
+        <Border Grid.Column="1"
+                x:Name="TaskList"
                 Background="{StaticResource TaskListBackground}">
-            <Grid>
+            <Grid Margin="10 0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="50" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Tasks" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" />
-                <controls:WatermarkTextBox Grid.Row="1" 
-                                           Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                <TextBlock Grid.Row="0"
+                           Text="Tasks"
+                           VerticalAlignment="Center"
+                           FontSize="22"
+                           FontWeight="Bold" />
+                <controls:WatermarkTextBox Grid.Row="1"
+                                           Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                            Watermark="Search..."
+                                           MinHeight="25"
                                            Height="35"
-                                           Margin="5 0"
                                            FontSize="16"
-                                           Padding="5"/>
+                                           Padding="5" />
                 <Border Grid.Row="2">
                     <ItemsControl ItemsSource="{Binding TasksView}"
-                                  ItemTemplate="{StaticResource TaskItemStyle}"/>
+                                  ItemTemplate="{StaticResource TaskItemStyle}" />
                 </Border>
             </Grid>
         </Border>
 
-
-        <Border Grid.Column="2" 
-                x:Name="TaskListDetails" 
-                Background="{StaticResource WindowBackground}"/>
-        <Border Grid.Column="3" 
-                x:Name="TaskStatus" 
-                Background="{StaticResource TaskStatusBackground}"/>
+        <Border Grid.Column="2"
+                x:Name="TaskListDetails"
+                Background="{StaticResource WindowBackground}" />
+        <Border Grid.Column="3"
+                x:Name="TaskStatus"
+                Background="{StaticResource TaskStatusBackground}" />
     </Grid>
 </Window>

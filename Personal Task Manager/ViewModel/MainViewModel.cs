@@ -1,4 +1,5 @@
 ﻿using Personal_Task_Manager.Models;
+using Personal_Task_Manager.ViewModel.Commands;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -10,6 +11,8 @@ namespace Personal_Task_Manager.ViewModel
         private string searchText;
         private ObservableCollection<TaskItem> tasks;
         private ICollectionView tasksView;
+
+        public RelayCommand<TaskItem> DeleteTaskCommand { get; }
 
         public string SearchText
         {
@@ -27,6 +30,16 @@ namespace Personal_Task_Manager.ViewModel
 
             TasksView = CollectionViewSource.GetDefaultView(Tasks);
             TasksView.Filter = FilterTasks;
+            DeleteTaskCommand = new RelayCommand<TaskItem>(DeleteTask);
+        }
+
+        private void DeleteTask(TaskItem item)
+        {
+            if (item != null)
+            {
+                Tasks.Remove(item);
+                TasksView.Refresh();
+            }
         }
 
         public ICollectionView TasksView
