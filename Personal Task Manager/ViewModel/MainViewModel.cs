@@ -1,18 +1,32 @@
 ﻿using Personal_Task_Manager.Models;
 using Personal_Task_Manager.ViewModel.Commands;
+using Personal_Task_Manager.Views;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Personal_Task_Manager.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        #region Fields
         private string searchText;
         private ObservableCollection<TaskItem> tasks;
         private ICollectionView tasksView;
+        #endregion
 
-        public RelayCommand<TaskItem> DeleteTaskCommand { get; }
+        #region Constructor
+        public MainViewModel()
+        {
+            Tasks = DummyData.DummySeeder.GetDummyTasks();
+
+            TasksView = CollectionViewSource.GetDefaultView(Tasks);
+            TasksView.Filter = FilterTasks;
+        }
+        #endregion
+
+        #region Properties
 
         public string SearchText
         {
@@ -21,23 +35,6 @@ namespace Personal_Task_Manager.ViewModel
             {
                 searchText = value;
                 OnPropertyChanged(nameof(SearchText));
-                TasksView.Refresh();
-            }
-        }
-        public MainViewModel()
-        {
-            Tasks = DummyData.DummySeeder.GetDummyTasks();
-
-            TasksView = CollectionViewSource.GetDefaultView(Tasks);
-            TasksView.Filter = FilterTasks;
-            DeleteTaskCommand = new RelayCommand<TaskItem>(DeleteTask);
-        }
-
-        private void DeleteTask(TaskItem item)
-        {
-            if (item != null)
-            {
-                Tasks.Remove(item);
                 TasksView.Refresh();
             }
         }
@@ -61,6 +58,25 @@ namespace Personal_Task_Manager.ViewModel
                 OnPropertyChanged(nameof(Tasks));
             }
         }
+        #endregion
+
+        #region Commands
+        public RelayCommand<TaskItem> DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
+        public RelayCommand AddTaskCommand => new RelayCommand(_ =>
+        {
+            AddTaskWindow.AddTask(Application.Current.MainWindow);
+        });
+        #endregion
+
+        #region Methods
+        private void DeleteTask(TaskItem item)
+        {
+            if (item != null)
+            {
+                Tasks.Remove(item);
+                TasksView.Refresh();
+            }
+        }
 
         private bool FilterTasks(object obj)
         {
@@ -72,5 +88,6 @@ namespace Personal_Task_Manager.ViewModel
             }
             return false;
         }
+        #endregion
     }
 }

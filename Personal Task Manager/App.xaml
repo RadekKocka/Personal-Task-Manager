@@ -8,9 +8,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Dictionaries/Colours.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Icons.xaml"/>
-                <ResourceDictionary Source="Dictionaries/Styles.xaml"/>
-                <ResourceDictionary Source="Dictionaries/TaskItemStyle.xaml"/>
-                <ResourceDictionary Source="Dictionaries/WatermarkTextBox.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/TaskItemStyle.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/WatermarkTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/ButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

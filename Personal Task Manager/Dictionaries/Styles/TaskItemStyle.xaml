@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Personal_Task_Manager.Models"
-                    xmlns:fa="http://schemas.fontawesome.io/icons/">
+                    xmlns:icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF">
 
     <DataTemplate x:Key="TaskItemStyle"
                   DataType="{x:Type local:TaskItem}">
@@ -38,9 +38,9 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
-                                            <fa:ImageAwesome Icon="TrashOutline"
-                                                             Height="15"
-                                                             Width="15" />
+                                            <icons:MaterialIcon Kind="DeleteOutline"
+                                                                Width="20"
+                                                                Height="20" />
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
