@@ -51,10 +51,8 @@
                             Command="{Binding AddTaskCommand}"
                             Height="30"
                             Width="30"
-                            ToolTip="Add new task">
-                        <Button.Content>
-                            <icons:MaterialIcon Kind="Add" />
-                        </Button.Content>
+                            ToolTip="Add new task"
+                            Content="{icons:MaterialIconExt Kind=Plus}">
                     </Button>
                 </Grid>
                 <controls:WatermarkTextBox Grid.Row="1"
