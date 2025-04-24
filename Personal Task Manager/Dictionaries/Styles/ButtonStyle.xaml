@@ -36,4 +36,7 @@
             </Setter>
         </Style.Setters>
     </Style>
+    <Style x:Key="DeleteButtonStyle"
+           TargetType="{x:Type Button}"
+           BasedOn="{StaticResource AddTaskButtonStyle}" />
 </ResourceDictionary>

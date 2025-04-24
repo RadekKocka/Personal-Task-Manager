@@ -37,7 +37,7 @@
                             Cursor="Hand"
                             Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding}"
-                            Style="{StaticResource AddTaskButtonStyle}"
+                            Style="{StaticResource DeleteButtonStyle}"
                             Content="{icons:MaterialIconExt Kind=TrashCanOutline,Size=20}"
                             Height="25"
                             Width="25">
