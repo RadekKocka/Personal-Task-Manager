@@ -27,7 +27,7 @@ namespace Personal_Task_Manager.DummyData
                     State = TaskState.InProgress,
                     Category = TaskCategory.Work,
                     Importance = TaskImportance.High,
-                    SubTasks = new List<TaskItem>()
+                    SubTasks = []
                 },
                 new TaskItem
                 {
@@ -41,7 +41,7 @@ namespace Personal_Task_Manager.DummyData
                     State = TaskState.Complete,
                     Category = TaskCategory.Personal,
                     Importance = TaskImportance.Medium,
-                    SubTasks = new List<TaskItem>()
+                    SubTasks = []
                 }
             };
         }

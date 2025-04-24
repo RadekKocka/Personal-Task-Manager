@@ -3,6 +3,10 @@
                     xmlns:local="clr-namespace:Personal_Task_Manager.Models"
                     xmlns:icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Dictionaries/Styles/ButtonStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <DataTemplate x:Key="TaskItemStyle"
                   DataType="{x:Type local:TaskItem}">
         <Border Margin="5">
@@ -29,29 +33,14 @@
                     <Button Grid.Column="1"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
-                            Margin="5"
+                            Margin="0 5"
                             Cursor="Hand"
                             Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding}"
-                            Content="">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Grid>
-                                                <Rectangle Fill="Transparent" />
-                                                <icons:MaterialIcon Kind="TrashCanOutline"
-                                                                    Width="20"
-                                                                    Height="20"
-                                                                    HorizontalAlignment="Center"
-                                                                    VerticalAlignment="Center" />
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
+                            Style="{StaticResource AddTaskButtonStyle}"
+                            Content="{icons:MaterialIconExt Kind=TrashCanOutline,Size=20}"
+                            Height="25"
+                            Width="25">
                     </Button>
                 </StackPanel>
             </Grid>

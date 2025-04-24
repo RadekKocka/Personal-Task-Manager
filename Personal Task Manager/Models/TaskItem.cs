@@ -14,6 +14,6 @@ namespace Personal_Task_Manager.Models
         public TaskState State{ get; set; }
         public TaskCategory Category { get; set; }
         public TaskImportance Importance { get; set; }
-        public List<TaskItem> SubTasks { get; set; } = [];
+        public List<TaskCheckList> SubTasks { get; set; } = [];
     }
 }

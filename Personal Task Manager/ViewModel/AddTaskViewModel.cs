@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Personal_Task_Manager.ViewModel
 {
-    class AddTaskViewModel
+    public class AddTaskViewModel
     {
     }
 }

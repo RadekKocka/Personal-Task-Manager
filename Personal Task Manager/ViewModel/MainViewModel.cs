@@ -71,16 +71,14 @@ namespace Personal_Task_Manager.ViewModel
         #region Methods
         private void DeleteTask(TaskItem item)
         {
-            if (item != null)
-            {
-                var message = $"Delete task {item.Title}?";
-                var caption = "Delete task";
-                if (MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
-                    Tasks.Remove(item);
-                    TasksView.Refresh();
-                }
+            ArgumentNullException.ThrowIfNull(item);
 
+            var message = $"Delete task {item.Title}?";
+            var caption = "Delete task";
+            if (MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                Tasks.Remove(item);
+                TasksView.Refresh();
             }
         }
 
