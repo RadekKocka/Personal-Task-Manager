@@ -38,7 +38,7 @@
                             Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding}"
                             Style="{StaticResource DeleteButtonStyle}"
-                            Content="{icons:MaterialIconExt Kind=TrashCanOutline,Size=20}"
+                            Content="{icons:MaterialIconExt Kind=TrashCanOutline}"
                             Height="25"
                             Width="25">
                     </Button>
