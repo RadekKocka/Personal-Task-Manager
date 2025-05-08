@@ -55,9 +55,18 @@
                                            Height="35"
                                            FontSize="16"
                                            Padding="5" />
-                <Border Grid.Row="2">
-                    <ItemsControl ItemsSource="{Binding TasksView}"
-                                  ItemTemplate="{StaticResource TaskItemStyle}" />
+                <Border Grid.Row="2"
+                        CornerRadius="5"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource AccentDarkOver}"
+                        Margin="0 5">
+                    <ListView ItemsSource="{Binding TasksView}"
+                              ItemTemplate="{StaticResource TaskItemStyle}"
+                              Background="Transparent"
+                              HorizontalContentAlignment="Stretch"
+                              Padding="0 5"
+                              BorderBrush="Transparent">
+                    </ListView>
                 </Border>
             </Grid>
         </Border>
