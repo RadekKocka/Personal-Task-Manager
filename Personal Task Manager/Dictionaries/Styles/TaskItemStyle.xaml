@@ -16,7 +16,6 @@
         <Grid MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"
