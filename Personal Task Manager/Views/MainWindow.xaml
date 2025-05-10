@@ -60,11 +60,13 @@
                         BorderThickness="1"
                         BorderBrush="{StaticResource AccentDarkOver}"
                         Margin="0 5">
-                    <ListView ItemsSource="{Binding TasksView}"
+                    <ListBox ItemsSource="{Binding TasksView}"
                               ItemTemplate="{StaticResource TaskItemStyle}"
                               Style="{StaticResource TaskListViewStyle}"
-                              SelectedItem="{Binding SelectedTask}">
-                    </ListView>
+                              SelectedItem="{Binding SelectedTask}"
+                              ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                              SelectionMode="Single">
+                    </ListBox>
                 </Border>
             </Grid>
         </Border>
