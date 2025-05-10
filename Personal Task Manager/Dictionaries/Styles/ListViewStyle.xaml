@@ -19,17 +19,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
-                    <StackPanel>
-                        <Border x:Name="ListViewItemBackground"
-                                Background="{TemplateBinding Background}"
-                                Padding="10 5"
-                                Margin="3 0"
-                                VerticalAlignment="Center"
+                    <Grid MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView, AncestorLevel=1}}"
+                          HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Border Background="{TemplateBinding Background}"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
                                 CornerRadius="4">
                             <ContentPresenter />
                         </Border>
-                        <Separator Margin="3"/>
-                    </StackPanel>
+                        <Separator Grid.Row="1"
+                                   Margin="3" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

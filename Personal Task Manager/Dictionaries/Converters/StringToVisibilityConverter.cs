@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Personal_Task_Manager.Dictionaries.Convereters
+namespace Personal_Task_Manager.Dictionaries.Converters
 {
     class StringToVisibilityConverter : IValueConverter
     {

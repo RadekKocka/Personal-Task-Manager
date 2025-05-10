@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Windows;
 
 namespace Personal_Task_Manager
@@ -10,5 +11,4 @@ namespace Personal_Task_Manager
     public partial class App : Application
     {
     }
-
 }

@@ -13,7 +13,7 @@
     <Folder Include="Assets\Files\Txt\" />
     <Folder Include="Assets\Images\" />
     <Folder Include="Assets\Files\Data\" />
-    <Folder Include="DataServices\" />
+    <Folder Include="DummyData\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
