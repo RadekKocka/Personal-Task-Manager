@@ -14,6 +14,7 @@ namespace Personal_Task_Manager.ViewModel
         private string searchText;
         private ObservableCollection<TaskItem> tasks;
         private ICollectionView tasksView;
+        private TaskItem selectedTask;
         #endregion
 
         #region Constructor
@@ -56,6 +57,16 @@ namespace Personal_Task_Manager.ViewModel
             {
                 tasks = value;
                 OnPropertyChanged(nameof(Tasks));
+            }
+        }
+
+        public TaskItem SelectedTask
+        {
+            get => selectedTask;
+            set
+            {
+                selectedTask = value;
+                OnPropertyChanged(nameof(SelectedTask));
             }
         }
         #endregion

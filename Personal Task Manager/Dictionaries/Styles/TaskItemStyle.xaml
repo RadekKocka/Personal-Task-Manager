@@ -9,41 +9,62 @@
 
     <DataTemplate x:Key="TaskItemStyle"
                   DataType="{x:Type local:TaskItem}">
-            <Border>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Vertical"
-                                Grid.Column="0">
-                        <TextBlock Text="{Binding Title}"
-                                   FontSize="22"
-                                   FontWeight="Bold"
-                                   FontFamily="Consolas" />
-                        <TextBlock Text="{Binding Description}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical"
-                                Grid.Column="1"
-                                HorizontalAlignment="Right">
-                        <TextBlock Text="{Binding DueDate}"
-                                   FontSize="12"
-                                   FontFamily="Consolas"
-                                   VerticalAlignment="Center" />
-                        <Button Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom"
-                                Margin="0 5"
-                                Cursor="Hand"
-                                Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                CommandParameter="{Binding}"
-                                Style="{StaticResource DeleteButtonStyle}"
-                                Content="{icons:MaterialIconExt Kind=TrashCanOutline}"
-                                Height="25"
-                                Width="25">
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="0">
+                <TextBlock Text="{Binding Title}"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           FontFamily="Consolas" />
+                <TextBlock Text="{Binding Description}" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right">
+                <TextBlock Text="{Binding DueDate}"
+                           FontSize="12"
+                           FontFamily="Consolas"
+                           VerticalAlignment="Center" />
+                <Button Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="0 5"
+                        Cursor="Hand"
+                        Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                        CommandParameter="{Binding}"
+                        Style="{StaticResource DeleteButtonStyle}"
+                        Content="{icons:MaterialIconExt Kind=TrashCanOutline}"
+                        Height="25"
+                        Width="25">
+                </Button>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TaskItemDetailsStyle"
+                  DataType="{x:Type local:TaskItem}">
+            <StackPanel Orientation="Vertical"
+                        Margin="10">
+            <DockPanel>
+                <TextBlock Text="{Binding Title}"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           FontFamily="Consolas"
+                           HorizontalAlignment="Left" />
+                <TextBlock Text="{Binding Importance}"
+                           HorizontalAlignment="Right"
+                           FontSize="18"
+                           VerticalAlignment="Center"
+                           Margin="0 0 10 0"/>
+            </DockPanel>
+            <TextBlock Grid.Row="1"
+                       Text="{Binding Description}" />
+
+        </StackPanel>
+
     </DataTemplate>
 </ResourceDictionary>

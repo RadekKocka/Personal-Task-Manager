@@ -62,7 +62,8 @@
                         Margin="0 5">
                     <ListView ItemsSource="{Binding TasksView}"
                               ItemTemplate="{StaticResource TaskItemStyle}"
-                              Style="{StaticResource TaskListViewStyle}">
+                              Style="{StaticResource TaskListViewStyle}"
+                              SelectedItem="{Binding SelectedTask}">
                     </ListView>
                 </Border>
             </Grid>
@@ -73,10 +74,12 @@
                 Background="{StaticResource WindowBackground}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="200" />
+                    <RowDefinition Height="230" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="70" />
+                    <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
+                <ContentControl Content="{Binding SelectedTask}"
+                                ContentTemplate="{StaticResource TaskItemDetailsStyle}" />
             </Grid>
         </Border>
         <Border Grid.Column="3"
