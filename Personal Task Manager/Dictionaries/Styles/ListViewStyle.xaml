@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="TaskListViewStyle"
+           TargetType="{x:Type ListView}">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="SelectionMode"
+                Value="Single" />
+    </Style>
+
+    <Style TargetType="{x:Type ListViewItem}">
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <StackPanel>
+                        <Border x:Name="ListViewItemBackground"
+                                Background="{TemplateBinding Background}"
+                                Padding="10 5"
+                                Margin="3 0"
+                                VerticalAlignment="Center"
+                                CornerRadius="4">
+                            <ContentPresenter />
+                        </Border>
+                        <Separator Margin="3"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="SandyBrown" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

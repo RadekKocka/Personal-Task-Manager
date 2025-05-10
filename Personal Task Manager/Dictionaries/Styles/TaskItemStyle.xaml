@@ -9,8 +9,7 @@
 
     <DataTemplate x:Key="TaskItemStyle"
                   DataType="{x:Type local:TaskItem}">
-        <StackPanel>
-            <Border Margin="5">
+            <Border>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*" />
@@ -46,7 +45,5 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Separator />
-        </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

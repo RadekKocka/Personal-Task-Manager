@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Dictionaries/Styles/WatermarkTextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles/LabelStyle.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/ListViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
