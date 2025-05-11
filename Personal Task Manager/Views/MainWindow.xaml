@@ -19,7 +19,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80" />
             <ColumnDefinition Width="435" />
-            <ColumnDefinition Width="*" MinWidth="150" />
+            <ColumnDefinition Width="*"
+                              MinWidth="150" />
             <ColumnDefinition Width="140" />
         </Grid.ColumnDefinitions>
 
@@ -57,20 +58,16 @@
                                            Height="35"
                                            FontSize="16"
                                            Padding="5" />
-                <Border Grid.Row="2"
-                        CornerRadius="5"
-                        BorderThickness="1"
-                        BorderBrush="{StaticResource AccentDarkOver}"
-                        Margin="0 5">
-                    <ListBox ItemsSource="{Binding TasksView}"
-                             ItemTemplate="{StaticResource TaskItemStyle}"
-                             Style="{StaticResource TaskListViewStyle}"
-                             SelectedItem="{Binding SelectedTask}"
-                             ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                             SelectionMode="Single"
-                             PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
-                    </ListBox>
-                </Border>
+
+                <ListBox Grid.Row="2"
+                         ItemsSource="{Binding TasksView}"
+                         ItemTemplate="{StaticResource TaskItemStyle}"
+                         Style="{StaticResource MainListViewStyle}"
+                         SelectedItem="{Binding SelectedTask}"
+                         ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                         SelectionMode="Single"
+                         PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
+                </ListBox>
             </Grid>
         </Border>
 
@@ -95,10 +92,15 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
-                <ContentControl Content="{Binding SelectedTask}"
+                <ContentControl Grid.Row="0"
+                                Content="{Binding SelectedTask}"
                                 ContentTemplate="{StaticResource TaskItemDetailsStyle}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch" />
+                <ListBox Grid.Row="1"
+                         Margin="15 0"
+                         Style="{StaticResource SubTasksListStyle}">
+                </ListBox>
             </Grid>
         </Border>
         <Border Grid.Column="3"

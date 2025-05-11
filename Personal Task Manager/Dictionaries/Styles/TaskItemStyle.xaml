@@ -13,7 +13,7 @@
 
     <DataTemplate x:Key="TaskItemStyle"
                   DataType="{x:Type local:TaskItem}">
-        <Grid MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -68,8 +68,7 @@
     <DataTemplate x:Key="TaskItemDetailsStyle"
                   DataType="{x:Type local:TaskItem}">
         <StackPanel Margin="20">
-            <Grid Margin="0 0 0 15"
-                  MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid, AncestorLevel=1}}">
+            <Grid Margin="0 0 0 15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
