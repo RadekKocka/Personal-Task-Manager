@@ -6,6 +6,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Dictionaries/Styles/ButtonStyle.xaml" />
+        <ResourceDictionary Source="/Dictionaries/Styles/TextBoxStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converters:DateTimeCultureConverter x:Key="DateTimeCultureConverter" />
@@ -41,7 +42,7 @@
                                HorizontalAlignment="Right"
                                Margin="10 0" />
                     <Button HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
+                            VerticalAlignment="Center"
                             Cursor="Hand"
                             Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding}"
@@ -98,6 +99,34 @@
                        TextWrapping="Wrap"
                        DockPanel.Dock="Bottom"
                        TextAlignment="Justify" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SubListTaskDataTemplate"
+                  DataType="{x:Type local:TaskCheckList}">
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Content="{Binding IsComplete}"
+                      Margin="5 2 10 2"
+                      IsChecked="{Binding IsComplete}">
+                <CheckBox.Style>
+                    <Style TargetType="{x:Type CheckBox}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type CheckBox}">
+                                    <Border Cursor="Hand"
+                                            Background="AliceBlue">
+                                        <icons:MaterialIcon Kind="TickCircle"
+                                                            Foreground="Green"
+                                                            Cursor="Hand">
+                                        </icons:MaterialIcon>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </CheckBox.Style>
+            </CheckBox>
+            <TextBlock Text="{Binding Description}"  VerticalAlignment="Center"/>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

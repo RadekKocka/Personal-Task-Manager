@@ -22,13 +22,9 @@ namespace Personal_Task_Manager
 
         private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is ListBox)
+            if (sender is not ListBox)
             {
-                var clickedItem = VisualTreeHelper.HitTest(this, e.GetPosition(this));
-                if (clickedItem?.VisualHit is not ListBoxItem)
-                {
-                    _viewModel.SelectedTask = null!;
-                }
+                _viewModel.SelectedTask = null!;
             }
         }
     }

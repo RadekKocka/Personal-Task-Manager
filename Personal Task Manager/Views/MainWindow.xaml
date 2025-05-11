@@ -31,7 +31,8 @@
 
         <Border Grid.Column="1"
                 x:Name="TaskList"
-                Background="{StaticResource TaskListBackground}">
+                Background="{StaticResource TaskListBackground}"
+                PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
             <Grid Margin="10 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
@@ -65,9 +66,9 @@
                          Style="{StaticResource MainListViewStyle}"
                          SelectedItem="{Binding SelectedTask}"
                          ItemContainerStyle="{StaticResource MainListViewItemStyle}"
-                         SelectionMode="Single"
-                         PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
+                         SelectionMode="Single">
                 </ListBox>
+                
             </Grid>
         </Border>
 
@@ -99,7 +100,10 @@
                                 VerticalAlignment="Stretch" />
                 <ListBox Grid.Row="1"
                          Margin="15 0"
-                         Style="{StaticResource SubTasksListStyle}">
+                         Style="{StaticResource SubTasksListStyle}"
+                         ItemContainerStyle="{StaticResource SubListTaskItem}"
+                         ItemTemplate="{StaticResource SubListTaskDataTemplate}"
+                         ItemsSource="{Binding SelectedTask.SubTasks}">
                 </ListBox>
             </Grid>
         </Border>

@@ -27,7 +27,17 @@ namespace Personal_Task_Manager.DummyData
                     State = TaskState.InProgress,
                     Category = TaskCategory.Work,
                     Importance = TaskImportance.High,
-                    SubTasks = []
+                    SubTasks = new List<TaskCheckList>
+                    {
+                        new() {
+                            Description = "Subtask 1",
+                            IsComplete = false
+                        },
+                        new() {
+                            Description = "Subtask 2",
+                            IsComplete = true
+                        }
+                    }
                 },
                 new TaskItem
                 {
