@@ -31,7 +31,8 @@
                                      Padding="{TemplateBinding Padding}"
                                      FontSize="{TemplateBinding FontSize}"
                                      FontFamily="{TemplateBinding FontFamily}"
-                                     FontWeight="{TemplateBinding FontWeight}"/>
+                                     FontWeight="{TemplateBinding FontWeight}"
+                                     MaxLength="40"/>
                             <TextBlock Text="{TemplateBinding Watermark}" 
                                        Foreground="{TemplateBinding WatermarkForeground}"
                                        Visibility="{TemplateBinding Text, Converter={StaticResource StringToVisibilityConverter}}"

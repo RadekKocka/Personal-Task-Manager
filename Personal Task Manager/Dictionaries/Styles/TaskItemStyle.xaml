@@ -105,28 +105,46 @@
     <DataTemplate x:Key="SubListTaskDataTemplate"
                   DataType="{x:Type local:TaskCheckList}">
         <StackPanel Orientation="Horizontal">
-            <CheckBox Content="{Binding IsComplete}"
-                      Margin="5 2 10 2"
-                      IsChecked="{Binding IsComplete}">
+            <CheckBox Margin="5 2 10 2"
+                      IsChecked="{Binding IsComplete}"
+                      Background="Transparent">
                 <CheckBox.Style>
                     <Style TargetType="{x:Type CheckBox}">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                                    <Border Cursor="Hand"
-                                            Background="AliceBlue">
+                                    <Grid>
                                         <icons:MaterialIcon Kind="TickCircle"
                                                             Foreground="Green"
                                                             Cursor="Hand">
                                         </icons:MaterialIcon>
-                                    </Border>
+                                    </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsComplete}"
+                                         Value="False">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type CheckBox}">
+                                            <Grid>
+                                                <icons:MaterialIcon Kind="Circle"
+                                                                    Foreground="White"
+                                                                    Cursor="Hand">
+                                                </icons:MaterialIcon>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
                 </CheckBox.Style>
             </CheckBox>
-            <TextBlock Text="{Binding Description}"  VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Description}"
+                       VerticalAlignment="Center"
+                       FontFamily="Consolas"/>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>
