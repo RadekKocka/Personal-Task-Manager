@@ -65,6 +65,8 @@ namespace Personal_Task_Manager.ViewModel
             get => selectedTask;
             set
             {
+                selectedTask = null;
+                OnPropertyChanged(nameof(SelectedTask));
                 selectedTask = value;
                 OnPropertyChanged(nameof(SelectedTask));
             }
