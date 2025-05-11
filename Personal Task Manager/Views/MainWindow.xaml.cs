@@ -22,12 +22,10 @@ namespace Personal_Task_Manager
         {
             if (sender is ListBox listBox)
             {
-                // Check if the click is on an empty space
                 var clickedItem = VisualTreeHelper.HitTest(this, e.GetPosition(this));
-                if (clickedItem?.VisualHit is not ListBoxItem element)
+                if (clickedItem?.VisualHit is not ListBoxItem)
                 {
-                    // Set SelectedTask to null
-                    if (DataContext is ViewModel.MainViewModel viewModel)
+                    if (DataContext is MainViewModel viewModel)
                     {
                         viewModel.SelectedTask = null!;
                     }
