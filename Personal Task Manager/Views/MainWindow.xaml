@@ -61,19 +61,32 @@
                         BorderBrush="{StaticResource AccentDarkOver}"
                         Margin="0 5">
                     <ListBox ItemsSource="{Binding TasksView}"
-                              ItemTemplate="{StaticResource TaskItemStyle}"
-                              Style="{StaticResource TaskListViewStyle}"
-                              SelectedItem="{Binding SelectedTask}"
-                              ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                              SelectionMode="Single">
+                             ItemTemplate="{StaticResource TaskItemStyle}"
+                             Style="{StaticResource TaskListViewStyle}"
+                             SelectedItem="{Binding SelectedTask}"
+                             ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                             SelectionMode="Single"
+                             PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
                     </ListBox>
                 </Border>
             </Grid>
         </Border>
 
         <Border Grid.Column="2"
-                x:Name="TaskListDetails"
-                Background="{StaticResource WindowBackground}">
+                x:Name="TaskListDetails">
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background"
+                            Value="{StaticResource WindowBackground}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding SelectedTask}"
+                                     Value="{x:Null}">
+                            <Setter Property="Background"
+                                    Value="{StaticResource AccentDark}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="230" />
@@ -81,7 +94,9 @@
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <ContentControl Content="{Binding SelectedTask}"
-                                ContentTemplate="{StaticResource TaskItemDetailsStyle}" />
+                                ContentTemplate="{StaticResource TaskItemDetailsStyle}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
             </Grid>
         </Border>
         <Border Grid.Column="3"
