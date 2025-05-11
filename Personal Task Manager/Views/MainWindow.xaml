@@ -12,12 +12,14 @@
         Title="MainWindow"
         Height="832"
         Width="1280"
+        MinWidth="805"
+        MinHeight="600"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80" />
             <ColumnDefinition Width="435" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" MinWidth="150" />
             <ColumnDefinition Width="140" />
         </Grid.ColumnDefinitions>
 

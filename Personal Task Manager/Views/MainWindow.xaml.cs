@@ -12,10 +12,12 @@ namespace Personal_Task_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainViewModel _viewModel;
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            _viewModel = new MainViewModel();
+            DataContext = _viewModel;
         }
 
         private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -25,10 +27,7 @@ namespace Personal_Task_Manager
                 var clickedItem = VisualTreeHelper.HitTest(this, e.GetPosition(this));
                 if (clickedItem?.VisualHit is not ListBoxItem)
                 {
-                    if (DataContext is MainViewModel viewModel)
-                    {
-                        viewModel.SelectedTask = null!;
-                    }
+                    _viewModel.SelectedTask = null!;
                 }
             }
         }

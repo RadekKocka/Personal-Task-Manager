@@ -8,11 +8,11 @@
         <ResourceDictionary Source="/Dictionaries/Styles/ButtonStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <converters:DateTimeCultureConverter x:Key="DateTimeCultureConverter" />
+    <converters:ImportanceBackgroundConverter x:Key="ImportanceBackgroundConverter" />
+
     <DataTemplate x:Key="TaskItemStyle"
                   DataType="{x:Type local:TaskItem}">
-        <DataTemplate.Resources>
-            <converters:DateTimeCultureConverter x:Key="DateTimeCultureConverter" />
-        </DataTemplate.Resources>
         <Grid MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -67,27 +67,38 @@
 
     <DataTemplate x:Key="TaskItemDetailsStyle"
                   DataType="{x:Type local:TaskItem}">
-            <StackPanel Margin="20">
-                <Grid Margin="0 0 0 15">
-                    <TextBlock Text="{Binding Title}"
-                               FontSize="22"
-                               FontWeight="Bold"
-                               FontFamily="Sans Serif"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               TextDecorations="Underline" />
+        <StackPanel Margin="20">
+            <Grid Margin="0 0 0 15"
+                  MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid, AncestorLevel=1}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="{Binding Title}"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           FontFamily="Sans Serif"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           TextDecorations="Underline" />
+                <Border CornerRadius="7"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Background="{Binding Importance, Converter={StaticResource ImportanceBackgroundConverter}}"
+                        Width="150">
                     <Label Content="{Binding Importance}"
-                           HorizontalAlignment="Right"
+                           HorizontalAlignment="Center"
                            FontSize="18"
                            VerticalAlignment="Center"
-                           Margin="0 0 10 0"
-                           DockPanel.Dock="Right" />
-                </Grid>
-                <TextBlock Grid.Row="1"
-                           Text="{Binding Description}"
-                           TextWrapping="Wrap"
-                           DockPanel.Dock="Bottom"
-                           TextAlignment="Justify" />
-            </StackPanel>
+                           Background="Transparent" />
+                </Border>
+            </Grid>
+            <TextBlock Grid.Row="1"
+                       Text="{Binding Description}"
+                       TextWrapping="Wrap"
+                       DockPanel.Dock="Bottom"
+                       TextAlignment="Justify" />
+        </StackPanel>
     </DataTemplate>
 </ResourceDictionary>
