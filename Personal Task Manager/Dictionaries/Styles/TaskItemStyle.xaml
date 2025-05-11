@@ -7,6 +7,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Dictionaries/Styles/ButtonStyle.xaml" />
         <ResourceDictionary Source="/Dictionaries/Styles/TextBoxStyle.xaml" />
+        <ResourceDictionary Source="/Dictionaries/Colours.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converters:DateTimeCultureConverter x:Key="DateTimeCultureConverter" />
@@ -105,46 +106,46 @@
     <DataTemplate x:Key="SubListTaskDataTemplate"
                   DataType="{x:Type local:TaskCheckList}">
         <StackPanel Orientation="Horizontal">
-            <CheckBox Margin="5 2 10 2"
-                      IsChecked="{Binding IsComplete}"
-                      Background="Transparent">
-                <CheckBox.Style>
-                    <Style TargetType="{x:Type CheckBox}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type CheckBox}">
-                                    <Grid>
-                                        <icons:MaterialIcon Kind="TickCircle"
-                                                            Foreground="Green"
-                                                            Cursor="Hand">
-                                        </icons:MaterialIcon>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsComplete}"
-                                         Value="False">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type CheckBox}">
-                                            <Grid>
+            <Border Cursor="Hand"
+                    Margin="5 2 10 2"
+                    Height="25"
+                    Width="25">
+                <CheckBox IsChecked="{Binding IsComplete}">
+                    <CheckBox.Style>
+                        <Style TargetType="{x:Type CheckBox}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                                        <Border CornerRadius="10"
+                                                Background="Transparent">
+                                            <icons:MaterialIcon Kind="TickCircle"
+                                                                Foreground="Green">
+                                            </icons:MaterialIcon>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsComplete}"
+                                             Value="False">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type CheckBox}">
                                                 <icons:MaterialIcon Kind="Circle"
-                                                                    Foreground="White"
-                                                                    Cursor="Hand">
+                                                                    Foreground="White">
                                                 </icons:MaterialIcon>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </CheckBox.Style>
-            </CheckBox>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+            </Border>
             <TextBlock Text="{Binding Description}"
                        VerticalAlignment="Center"
-                       FontFamily="Consolas"/>
+                       FontFamily="Consolas" />
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>
