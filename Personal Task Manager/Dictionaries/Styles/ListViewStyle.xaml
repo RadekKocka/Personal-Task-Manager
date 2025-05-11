@@ -58,14 +58,13 @@
     </Style>
 
     <Style TargetType="{x:Type ListBoxItem}"
-           x:Key="ListViewItemStyle">
+           x:Key="MainListViewItemStyle">
         <Setter Property="Cursor"
                 Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Grid HorizontalAlignment="Stretch"
-                          Margin="5">
+                    <Grid HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
@@ -73,11 +72,12 @@
                         <Border Background="{TemplateBinding Background}"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
-                                CornerRadius="4">
+                                CornerRadius="4"
+                                Margin="3">
                             <ContentPresenter />
                         </Border>
                         <Separator Grid.Row="1"
-                                   Margin="3" />
+                                   Margin="3 0" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

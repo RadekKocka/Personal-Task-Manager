@@ -64,7 +64,7 @@
                          ItemTemplate="{StaticResource TaskItemStyle}"
                          Style="{StaticResource MainListViewStyle}"
                          SelectedItem="{Binding SelectedTask}"
-                         ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                         ItemContainerStyle="{StaticResource MainListViewItemStyle}"
                          SelectionMode="Single"
                          PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
                 </ListBox>
