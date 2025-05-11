@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Dictionaries/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles/LabelStyle.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles/ListViewStyle.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/BorderStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
