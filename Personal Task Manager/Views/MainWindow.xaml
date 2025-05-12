@@ -75,6 +75,9 @@
 
         <Border Grid.Column="2"
                 Style="{StaticResource SelectedTaskAnimatedBorderStyle}">
+            <Border.RenderTransform>
+                <ScaleTransform ScaleY="1" />
+            </Border.RenderTransform>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="230" />

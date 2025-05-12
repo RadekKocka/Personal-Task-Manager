@@ -10,17 +10,20 @@ namespace Personal_Task_Manager.Dictionaries.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            string importanceString;
             if (value is TaskImportance importance)
             {
-                // Retrieve the appropriate color resource based on TaskImportance
-                return importance switch
+                importanceString = importance switch
                 {
-                    TaskImportance.Low => Application.Current.Resources["LowImportance"] as SolidColorBrush,
-                    TaskImportance.Medium => Application.Current.Resources["MediumImportance"] as SolidColorBrush,
-                    TaskImportance.High => Application.Current.Resources["HighImportance"] as SolidColorBrush,
-                    TaskImportance.Critical => Application.Current.Resources["CriticalImportance"] as SolidColorBrush,
-                    _ => Brushes.Transparent,
+                    TaskImportance.Low => "LowImportance",
+                    TaskImportance.Medium => "MediumImportance",
+                    TaskImportance.High => "HighImportance",
+                    TaskImportance.Critical => "CriticalImportance",
+                    _ => throw new ArgumentOutOfRangeException(nameof(importance), importance, "Invalid TaskImportance value."),
                 };
+
+                if (Application.Current.Resources[importanceString] is SolidColorBrush brush)
+                    return brush;
             }
             return Brushes.Transparent;
         }

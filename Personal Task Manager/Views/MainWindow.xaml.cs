@@ -1,7 +1,6 @@
 ﻿using Personal_Task_Manager.Models;
 using Personal_Task_Manager.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
