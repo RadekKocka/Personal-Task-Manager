@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace Personal_Task_Manager.ViewModel
 {
@@ -15,6 +16,7 @@ namespace Personal_Task_Manager.ViewModel
         private ObservableCollection<TaskItem> tasks;
         private ICollectionView tasksView;
         private TaskItem selectedTask;
+        private DispatcherTimer timer;
         #endregion
 
         #region Constructor
@@ -24,6 +26,28 @@ namespace Personal_Task_Manager.ViewModel
 
             TasksView = CollectionViewSource.GetDefaultView(Tasks);
             TasksView.Filter = FilterTasks;
+            timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(1)
+            };
+
+            timer.Tick += (s, e) =>
+            {
+                foreach (var task in Tasks.Where(x => !x.IsComplete))
+                {
+                    if (task.StartDate > DateTime.Now)
+                    {
+                        task.Timer = TimeSpan.Zero;
+                        continue;
+                    }
+                    task.Timer = DateTime.Now - task.StartDate;
+                    OnPropertyChanged(nameof(SelectedTask));
+                    OnPropertyChanged(nameof(TaskElapsedTime));
+                    OnPropertyChanged(nameof(CurrentTime));
+                }
+            };
+
+            timer.Start();
         }
         #endregion
 
@@ -71,6 +95,10 @@ namespace Personal_Task_Manager.ViewModel
                 OnPropertyChanged(nameof(SelectedTask));
             }
         }
+
+        public DateTime CurrentTime => DateTime.Now;
+
+        public String? TaskElapsedTime => new DateTime(SelectedTask?.Timer.Ticks ?? 0).ToLongTimeString();
         #endregion
 
         #region Commands

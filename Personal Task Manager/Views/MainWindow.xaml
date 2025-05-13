@@ -16,8 +16,7 @@
             <ColumnDefinition Width="140" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" x:Name="NavPanel" Background="{StaticResource AccentDark}">
-        </Border>
+        <Border Grid.Column="0" x:Name="NavPanel" Background="{StaticResource AccentDark}" />
 
         <Border Grid.Column="1" x:Name="TaskList" Background="{StaticResource TaskListBackground}">
             <Grid Margin="10 0">
@@ -27,39 +26,27 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Label Style="{StaticResource Heading1}" 
-                       Content="Tasks" 
-                       VerticalAlignment="Center"
-                       IsHitTestVisible="False" />
-                <Button Style="{StaticResource AddTaskButtonStyle}" 
-                        Command="{Binding AddTaskCommand}" 
-                        Height="30"
-                        Width="30" 
-                        HorizontalAlignment="Right" 
-                        ToolTip="Add new task"
+                <Label Style="{StaticResource Heading1}" Content="Tasks" VerticalAlignment="Center"
+                        IsHitTestVisible="False" />
+                <Button Style="{StaticResource AddTaskButtonStyle}" Command="{Binding AddTaskCommand}" Height="30"
+                        Width="30" HorizontalAlignment="Right" ToolTip="Add new task"
                         Content="{icons:MaterialIconExt Kind=PlaylistAdd,Size=25}">
                 </Button>
                 <controls:WatermarkTextBox Grid.Row="1"
-                                           Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                           Watermark="Search..." 
-                                           MinHeight="25" 
-                                           Height="35" 
-                                           FontSize="16" 
-                                           Padding="5" />
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Watermark="Search..." MinHeight="25" Height="35" FontSize="16" Padding="5" />
 
                 <ListBox Grid.Row="2" ItemsSource="{Binding TasksView}"
-                         ItemTemplate="{StaticResource TaskItemDataTemplate}"
-                         Style="{StaticResource MainListViewStyle}" 
-                         SelectedItem="{Binding SelectedTask}"
-                         ItemContainerStyle="{StaticResource MainListViewItemStyle}" 
-                         SelectionMode="Single"
-                         VerticalContentAlignment="Stretch" 
-                         HorizontalAlignment="Stretch"
-                         PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
+                        ItemTemplate="{StaticResource TaskItemDataTemplate}" Style="{StaticResource MainListViewStyle}"
+                        SelectedItem="{Binding SelectedTask}"
+                        ItemContainerStyle="{StaticResource MainListViewItemStyle}" SelectionMode="Single"
+                        VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                        PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
                 </ListBox>
             </Grid>
         </Border>
 
+        <Border Grid.Column="2" Background="{StaticResource AccentDark}" />
         <Border Grid.Column="2" Style="{StaticResource SelectedTaskAnimatedBorderStyle}">
             <Border.RenderTransform>
                 <ScaleTransform ScaleY="1" />
@@ -70,20 +57,25 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
-                <ContentControl Grid.Row="0" 
-                                Content="{Binding SelectedTask}"
-                                ContentTemplate="{StaticResource TaskItemDetailsDataTemplate}" 
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                <ListBox Grid.Row="1" 
-                         Margin="15 0" 
-                         Style="{StaticResource SubTasksListStyle}"
-                         ItemContainerStyle="{StaticResource SubListTaskItem}"
-                         ItemTemplate="{StaticResource SubListTaskDataTemplate}"
-                         ItemsSource="{Binding SelectedTask.SubTasks}">
+                <ContentControl Grid.Row="0" Content="{Binding SelectedTask}"
+                        ContentTemplate="{StaticResource TaskItemDetailsDataTemplate}" HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" />
+                <ListBox Grid.Row="1" Margin="15 0" Style="{StaticResource SubTasksListStyle}"
+                        ItemContainerStyle="{StaticResource SubListTaskItem}"
+                        ItemTemplate="{StaticResource SubListTaskDataTemplate}"
+                        ItemsSource="{Binding SelectedTask.SubTasks}">
                 </ListBox>
             </Grid>
         </Border>
-        <Border Grid.Column="3" x:Name="TaskStatus" Background="{StaticResource AccentDark}" />
+        <Border Grid.Column="3" x:Name="TaskStatus" Background="{StaticResource AccentDark}">
+            <StackPanel HorizontalAlignment="Center" Margin="0 20">
+                <TextBlock
+                        Text="{Binding TaskElapsedTime, FallbackValue=0, TargetNullValue=0, Converter={StaticResource DateTimeCultureConverter}}"
+                        Foreground="White" />
+                <TextBlock
+                        Text="{Binding CurrentTime, FallbackValue=0, TargetNullValue=0, Converter={StaticResource DateTimeCultureConverter}}"
+                        Foreground="White" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
