@@ -47,8 +47,8 @@
                                            FontSize="16" 
                                            Padding="5" />
 
-                <ListBox Grid.Row="2" ItemsSource="{Binding TasksView}" 
-                         ItemTemplate="{StaticResource TaskItemStyle}"
+                <ListBox Grid.Row="2" ItemsSource="{Binding TasksView}"
+                         ItemTemplate="{StaticResource TaskItemDataTemplate}"
                          Style="{StaticResource MainListViewStyle}" 
                          SelectedItem="{Binding SelectedTask}"
                          ItemContainerStyle="{StaticResource MainListViewItemStyle}" 
@@ -72,7 +72,7 @@
                 </Grid.RowDefinitions>
                 <ContentControl Grid.Row="0" 
                                 Content="{Binding SelectedTask}"
-                                ContentTemplate="{StaticResource TaskItemDetailsStyle}" 
+                                ContentTemplate="{StaticResource TaskItemDetailsDataTemplate}" 
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch" />
                 <ListBox Grid.Row="1" 
@@ -84,6 +84,6 @@
                 </ListBox>
             </Grid>
         </Border>
-        <Border Grid.Column="3" x:Name="TaskStatus" Background="{StaticResource TaskStatusBackground}" />
+        <Border Grid.Column="3" x:Name="TaskStatus" Background="{StaticResource AccentDark}" />
     </Grid>
 </Window>

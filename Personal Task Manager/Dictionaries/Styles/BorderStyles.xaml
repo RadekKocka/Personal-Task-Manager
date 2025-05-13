@@ -10,7 +10,7 @@
     </Storyboard>
 
     <Style x:Key="SelectedTaskAnimatedBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="Background" Value="{StaticResource AccentDarkOver}" />
+        <Setter Property="Background" Value="{StaticResource BackgroundTaskDetails}" />
         <Setter Property="Opacity" Value="0" />
         <Setter Property="RenderTransformOrigin" Value="0 0.2" />
         <Style.Triggers>

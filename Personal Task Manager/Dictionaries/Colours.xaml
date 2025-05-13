@@ -10,8 +10,8 @@
     <Color x:Key="TaskStatusBackgroundColor">#FFF6F6F6</Color>
     <Color x:Key="DefaultTextColor">#FF474747</Color>
     <Color x:Key="OnAccentColor">#FFFFFFFF</Color>
-    <Color x:Key="OnItemHoverColor">#FFA67437</Color>
-    <Color x:Key="BackgroundTaskDetailsColor">#FFF2C166</Color>
+    <Color x:Key="OnItemHoverColor">#FFF2C166</Color>
+    <Color x:Key="BackgroundTaskDetailsColor">#FFA67437</Color>
 
     <!-- Task importance colors -->
     <Color x:Key="LowImportanceColor">#FF0CAFF4</Color>
