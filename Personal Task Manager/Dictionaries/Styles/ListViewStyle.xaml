@@ -1,63 +1,42 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Dictionaries/Colours.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DropShadowEffect x:Key="DropShadowEffect"
-                      BlurRadius="8"
-                      ShadowDepth="5"
-                      Opacity="0.3"
-                      RenderingBias="Quality"
-                      Color="{StaticResource AccentDarkOverColor}" />
+    <DropShadowEffect x:Key="DropShadowEffect" BlurRadius="8" ShadowDepth="5" Opacity="0.3" RenderingBias="Quality"
+            Color="{StaticResource AccentDarkOverColor}" />
 
-    <Style x:Key="BaseListViewStyle"
-           TargetType="{x:Type ListBox}">
-        <Setter Property="Background"
-                Value="{StaticResource TaskListBackground}" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="SelectionMode"
-                Value="Single" />
-        <Setter Property="VerticalAlignment"
-                Value="Stretch" />
+    <Style x:Key="BaseListViewStyle" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="{StaticResource TaskListBackground}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
-                    <Border Grid.Row="2"
-                            CornerRadius="5"
-                            BorderThickness="1"
-                            BorderBrush="{StaticResource AccentDarkOver}"
-                            Background="{TemplateBinding Background}"
+                    <Border Grid.Row="2" CornerRadius="5" BorderThickness="1"
+                            BorderBrush="{StaticResource AccentDarkOver}" Background="{TemplateBinding Background}"
                             Margin="0 5">
                         <ItemsPresenter />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Effect"
-                Value="{StaticResource DropShadowEffect}" />
+        <Setter Property="Effect" Value="{StaticResource DropShadowEffect}" />
     </Style>
 
-    <Style x:Key="MainListViewStyle"
-           TargetType="{x:Type ListBox}"
-           BasedOn="{StaticResource BaseListViewStyle}">
+    <Style x:Key="MainListViewStyle" TargetType="{x:Type ListBox}" BasedOn="{StaticResource BaseListViewStyle}">
     </Style>
 
-    <Style x:Key="SubTasksListStyle"
-           TargetType="{x:Type ListBox}"
-           BasedOn="{StaticResource BaseListViewStyle}">
+    <Style x:Key="SubTasksListStyle" TargetType="{x:Type ListBox}" BasedOn="{StaticResource BaseListViewStyle}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding SelectedTask}"
-                         Value="{x:Null}">
+            <DataTrigger Binding="{Binding SelectedTask}" Value="{x:Null}">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListBox}">
-                            <Border Grid.Row="2"
-                                    CornerRadius="5"
-                                    BorderThickness="0"
-                                    Margin="0 5">
+                            <Border Grid.Row="2" CornerRadius="5" BorderThickness="0" Margin="0 5">
                                 <ItemsPresenter />
                             </Border>
                         </ControlTemplate>
@@ -67,10 +46,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type ListBoxItem}"
-           x:Key="MainListViewItemStyle">
-        <Setter Property="Cursor"
-                Value="Hand" />
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="MainListViewItemStyle">
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -79,42 +56,33 @@
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
-                        <Border x:Name="AnimatedBorder"
+                        <Border x:Name="AnimatedBorder" 
                                 Background="{TemplateBinding Background}"
-                                VerticalAlignment="Stretch"
-                                HorizontalAlignment="Stretch"
-                                CornerRadius="4"
+                                VerticalAlignment="Stretch" 
+                                HorizontalAlignment="Stretch" 
+                                CornerRadius="4" 
                                 Margin="8"
                                 RenderTransformOrigin="0.5 0.5">
                             <Border.RenderTransform>
-                                <ScaleTransform ScaleX="1"
-                                                ScaleY="1" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
                             </Border.RenderTransform>
                             <ContentPresenter />
                         </Border>
-                        <Separator Grid.Row="1"
-                                   Margin="3 0" />
+                        <Separator Grid.Row="1" Margin="3 0" Background="{StaticResource AccentDark}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver"
-                                 Value="True">
-                            <Setter Property="Background"
-                                    Value="SandyBrown" />
-                            <Setter Property="Effect"
-                                    Value="{StaticResource DropShadowEffect}" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource OnItemHover}" />
+                            <Setter Property="Effect" Value="{StaticResource DropShadowEffect}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="AnimatedBorder"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                         From="1"
-                                                         To="1.02"
-                                                         Duration="0:0:0.2" />
+                                                         From="1" To="1.02" Duration="0:0:0.2" />
                                         <DoubleAnimation Storyboard.TargetName="AnimatedBorder"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                         From="1"
-                                                         To="1.02"
-                                                         Duration="0:0:0.2" />
+                                                         From="1" To="1.02" Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -122,15 +90,11 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="AnimatedBorder"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                         From="1.02"
-                                                         To="1"
-                                                         Duration="0:0:0.2" />
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                From="1.02" To="1" Duration="0:0:0.2" />
                                         <DoubleAnimation Storyboard.TargetName="AnimatedBorder"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                         From="1.02"
-                                                         To="1"
-                                                         Duration="0:0:0.2" />
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                From="1.02" To="1" Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -142,9 +106,7 @@
 
     </Style>
 
-    <Style x:Key="SubListTaskItem"
-           TargetType="{x:Type ListBoxItem}">
-        <Setter Property="Background"
-                Value="LightGray" />
+    <Style x:Key="SubListTaskItem" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="LightGray" />
     </Style>
 </ResourceDictionary>

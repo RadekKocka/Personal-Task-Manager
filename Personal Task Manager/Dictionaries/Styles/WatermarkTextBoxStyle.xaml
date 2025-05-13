@@ -5,10 +5,8 @@
    xmlns:converters="clr-namespace:Personal_Task_Manager.Dictionaries.Converters">
 
     <Style TargetType="{x:Type local:WatermarkTextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-        <Setter Property="BorderBrush"
-                Value="{StaticResource AccentDarkOver}" />
-        <Setter Property="BorderThickness"
-                Value="1" />
+        <Setter Property="BorderBrush" Value="{StaticResource AccentDarkOver}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:WatermarkTextBox}">

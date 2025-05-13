@@ -1,15 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Color definitions -->
-    <Color x:Key="AccentDarkColor">#FF164863</Color>
+    <Color x:Key="AccentDarkColor">#FF124037</Color>
     <Color x:Key="AccentDarkOverColor">#FF396A84</Color>
     <Color x:Key="AccentDarkClickColor">#FF66A3C5</Color>
-    <Color x:Key="TaskListBackgroundColor">#FFECECEC</Color>
+    <Color x:Key="TaskListBackgroundColor">#FFA6A08F</Color>
     <Color x:Key="WindowBackgroundColor">#FFFFFFFF</Color>
     <Color x:Key="TaskStatusBackgroundColor">#FFF6F6F6</Color>
     <Color x:Key="DefaultTextColor">#FF474747</Color>
     <Color x:Key="OnAccentColor">#FFFFFFFF</Color>
+    <Color x:Key="OnItemHoverColor">#FFA67437</Color>
+    <Color x:Key="BackgroundTaskDetailsColor">#FFF2C166</Color>
 
     <!-- Task importance colors -->
     <Color x:Key="LowImportanceColor">#FF0CAFF4</Color>
@@ -34,6 +36,8 @@
     <SolidColorBrush x:Key="TaskStatusBackground" Color="{StaticResource TaskStatusBackgroundColor}" />
     <SolidColorBrush x:Key="DefaultText" Color="{StaticResource DefaultTextColor}" />
     <SolidColorBrush x:Key="OnAccent" Color="{StaticResource OnAccentColor}" />
+    <SolidColorBrush x:Key="OnItemHover" Color="{StaticResource OnItemHoverColor}" />
+    <SolidColorBrush x:Key="BackgroundTaskDetails" Color="{StaticResource BackgroundTaskDetailsColor}" />
 
     <!-- Task importance brushes -->
     <SolidColorBrush x:Key="LowImportance" Color="{StaticResource LowImportanceColor}" />
