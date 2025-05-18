@@ -9,6 +9,7 @@ namespace Personal_Task_Manager.Models
         public string? Description { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public bool IsComplete { get; set; }
         public TimeSpan Timer { get; set; }
         public TaskState State{ get; set; }

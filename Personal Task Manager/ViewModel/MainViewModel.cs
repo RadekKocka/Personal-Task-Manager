@@ -1,4 +1,5 @@
 ﻿using Personal_Task_Manager.Models;
+using Personal_Task_Manager.Services;
 using Personal_Task_Manager.ViewModel.Commands;
 using Personal_Task_Manager.Views;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace Personal_Task_Manager.ViewModel
         private ObservableCollection<TaskItem> tasks;
         private ICollectionView tasksView;
         private TaskItem selectedTask;
-        private DispatcherTimer timer;
+        private TaskTimerService timer;
         #endregion
 
         #region Constructor
@@ -26,28 +27,7 @@ namespace Personal_Task_Manager.ViewModel
 
             TasksView = CollectionViewSource.GetDefaultView(Tasks);
             TasksView.Filter = FilterTasks;
-            timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromMilliseconds(1)
-            };
-
-            timer.Tick += (s, e) =>
-            {
-                foreach (var task in Tasks.Where(x => !x.IsComplete))
-                {
-                    if (task.StartDate > DateTime.Now)
-                    {
-                        task.Timer = TimeSpan.Zero;
-                        continue;
-                    }
-                    task.Timer = DateTime.Now - task.StartDate;
-                    OnPropertyChanged(nameof(SelectedTask));
-                    OnPropertyChanged(nameof(TaskElapsedTime));
-                    OnPropertyChanged(nameof(CurrentTime));
-                }
-            };
-
-            timer.Start();
+            timer = new TaskTimerService(UpdateTimes);
         }
         #endregion
 
@@ -93,6 +73,10 @@ namespace Personal_Task_Manager.ViewModel
                 OnPropertyChanged(nameof(SelectedTask));
                 selectedTask = value;
                 OnPropertyChanged(nameof(SelectedTask));
+                if (selectedTask != null)
+                {
+                    UpdateTaskTime(selectedTask);
+                }
             }
         }
 
@@ -132,6 +116,37 @@ namespace Personal_Task_Manager.ViewModel
                        (task.Description?.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ?? false);
             }
             return false;
+        }
+
+        private void UpdateTaskTime(TaskItem selectedTask)
+        {
+            try
+            {
+                if (!selectedTask.IsComplete)
+                {
+                    var elapsedTime = DateTime.Now - selectedTask.StartDate;
+                    SelectedTask.Timer = elapsedTime < TimeSpan.Zero ? TimeSpan.Zero : elapsedTime;
+                }
+                else
+                {
+                    SelectedTask.Timer = SelectedTask.EndDate - SelectedTask.StartDate;
+                }
+                OnPropertyChanged(nameof(TaskElapsedTime));
+                OnPropertyChanged(nameof(SelectedTask));
+            }
+            catch (Exception ex)
+            {
+                // Todo: make a logger
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void UpdateTimes()
+        {
+            OnPropertyChanged(nameof(CurrentTime));
+            if (SelectedTask == null)
+                return;
+            UpdateTaskTime(SelectedTask);
         }
         #endregion
     }
