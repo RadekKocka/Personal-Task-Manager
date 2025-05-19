@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace Personal_Task_Manager.ViewModel
@@ -38,8 +39,7 @@ namespace Personal_Task_Manager.ViewModel
             get => searchText;
             set
             {
-                searchText = value;
-                OnPropertyChanged(nameof(SearchText));
+                SetProperty(ref searchText, value);
                 TasksView.Refresh();
             }
         }
@@ -47,21 +47,13 @@ namespace Personal_Task_Manager.ViewModel
         public ICollectionView TasksView
         {
             get => tasksView;
-            private set
-            {
-                tasksView = value;
-                OnPropertyChanged(nameof(TasksView));
-            }
+            set => SetProperty(ref tasksView, value);
         }
 
         public ObservableCollection<TaskItem> Tasks
         {
             get => tasks;
-            set
-            {
-                tasks = value;
-                OnPropertyChanged(nameof(Tasks));
-            }
+            set => SetProperty(ref tasks, value);
         }
 
         public TaskItem SelectedTask
@@ -69,28 +61,27 @@ namespace Personal_Task_Manager.ViewModel
             get => selectedTask;
             set
             {
+                // set null so storyboard can happen
                 selectedTask = null;
                 OnPropertyChanged(nameof(SelectedTask));
                 selectedTask = value;
                 OnPropertyChanged(nameof(SelectedTask));
-                if (selectedTask != null)
-                {
-                    UpdateTaskTime(selectedTask);
-                }
+                OnPropertyChanged(nameof(TaskElapsedTime));
             }
         }
 
         public DateTime CurrentTime => DateTime.Now;
 
-        public String? TaskElapsedTime => new DateTime(SelectedTask?.Timer.Ticks ?? 0).ToLongTimeString();
+        public string TaskElapsedTime => (SelectedTask?.GetTaskElapsedTime() ?? TimeSpan.Zero).ToString(@"hh\:mm\:ss");
         #endregion
 
         #region Commands
-        public RelayCommand<TaskItem> DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
-        public RelayCommand AddTaskCommand => new RelayCommand(_ =>
+        public ICommand DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
+        public ICommand AddTaskCommand => new RelayCommand(_ =>
         {
             AddTaskWindow.AddTask(Application.Current.MainWindow);
         });
+        public ICommand CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CanCompleteTask);
         #endregion
 
         #region Methods
@@ -118,35 +109,30 @@ namespace Personal_Task_Manager.ViewModel
             return false;
         }
 
-        private void UpdateTaskTime(TaskItem selectedTask)
-        {
-            try
-            {
-                if (!selectedTask.IsComplete)
-                {
-                    var elapsedTime = DateTime.Now - selectedTask.StartDate;
-                    SelectedTask.Timer = elapsedTime < TimeSpan.Zero ? TimeSpan.Zero : elapsedTime;
-                }
-                else
-                {
-                    SelectedTask.Timer = SelectedTask.EndDate - SelectedTask.StartDate;
-                }
-                OnPropertyChanged(nameof(TaskElapsedTime));
-                OnPropertyChanged(nameof(SelectedTask));
-            }
-            catch (Exception ex)
-            {
-                // Todo: make a logger
-                Console.WriteLine(ex.Message);
-            }
-        }
-
         private void UpdateTimes()
         {
             OnPropertyChanged(nameof(CurrentTime));
-            if (SelectedTask == null)
-                return;
-            UpdateTaskTime(SelectedTask);
+            if (SelectedTask != null)
+            {
+                OnPropertyChanged(nameof(TaskElapsedTime));
+            }
+        }
+
+        private void CompleteTask(TaskItem taskItem)
+        {
+            ArgumentNullException.ThrowIfNull(taskItem);
+            var message = $"Complete task {taskItem.Title} and it's subsequent subtasks?";
+            var caption = "Complete task";
+            if (MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                taskItem.CompleteTask();
+                TasksView.Refresh();
+            }
+        }
+
+        private bool CanCompleteTask(TaskItem taskItem)
+        {
+            return taskItem != null && !taskItem.IsComplete;
         }
         #endregion
     }

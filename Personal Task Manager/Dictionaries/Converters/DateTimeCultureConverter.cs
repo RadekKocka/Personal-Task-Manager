@@ -11,7 +11,7 @@ namespace Personal_Task_Manager.Dictionaries.Converters
             {
                 return datetime.ToString(CultureInfo.CurrentCulture);
             }
-            return value!.ToString()!;
+            return string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
