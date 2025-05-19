@@ -15,9 +15,9 @@ namespace Personal_Task_Manager.ViewModel
     {
         #region Fields
         private string searchText;
-        private ObservableCollection<TaskItem> tasks;
+        private ObservableCollection<TaskItemViewModel> tasks;
         private ICollectionView tasksView;
-        private TaskItem selectedTask;
+        private TaskItemViewModel selectedTask;
         private TaskTimerService timer;
         #endregion
 
@@ -55,7 +55,7 @@ namespace Personal_Task_Manager.ViewModel
             }
         }
 
-        public ObservableCollection<TaskItem> Tasks
+        public ObservableCollection<TaskItemViewModel> Tasks
         {
             get => tasks;
             set
@@ -65,7 +65,7 @@ namespace Personal_Task_Manager.ViewModel
             }
         }
 
-        public TaskItem SelectedTask
+        public TaskItemViewModel SelectedTask
         {
             get => selectedTask;
             set
@@ -83,21 +83,21 @@ namespace Personal_Task_Manager.ViewModel
 
         public DateTime CurrentTime => DateTime.Now;
 
-        public String? TaskElapsedTime => new DateTime(SelectedTask?.Timer.Ticks ?? 0).ToLongTimeString();
+        public String? TaskElapsedTime => new DateTime(SelectedTask?.TaskElapsedTime.Ticks ?? 0).ToLongTimeString();
         #endregion
 
         #region Commands
-        public RelayCommand<TaskItem> DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
+        public RelayCommand<TaskItemViewModel> DeleteTaskCommand => new RelayCommand<TaskItemViewModel>(DeleteTask);
         public RelayCommand AddTaskCommand => new RelayCommand(_ =>
         {
             AddTaskWindow.AddTask(Application.Current.MainWindow);
         });
 
-        public RelayCommand<TaskItem> CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CompleteTaskCanExecute);
+        public RelayCommand<TaskItemViewModel> CompleteTaskCommand => new RelayCommand<TaskItemViewModel>(CompleteTask, CompleteTaskCanExecute);
         #endregion
 
         #region Methods
-        private void DeleteTask(TaskItem item)
+        private void DeleteTask(TaskItemViewModel item)
         {
             ArgumentNullException.ThrowIfNull(item);
 
@@ -110,19 +110,19 @@ namespace Personal_Task_Manager.ViewModel
             }
         }
 
-        private void CompleteTask(TaskItem item)
+        private void CompleteTask(TaskItemViewModel item)
         {
             item.CompleteTask();
         }
 
-        private bool CompleteTaskCanExecute(TaskItem taskItem)
+        private bool CompleteTaskCanExecute(TaskItemViewModel taskItem)
         {
             return taskItem != null && taskItem.State is not TaskState.Complete;
         }
 
         private bool FilterTasks(object obj)
         {
-            if (obj is TaskItem task)
+            if (obj is TaskItemViewModel task)
             {
                 return string.IsNullOrWhiteSpace(SearchText) ||
                        task.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
@@ -131,11 +131,11 @@ namespace Personal_Task_Manager.ViewModel
             return false;
         }
 
-        private void UpdateTaskTime(TaskItem selectedTask)
+        private void UpdateTaskTime(TaskItemViewModel selectedTask)
         {
             try
             {
-                selectedTask.Timer = selectedTask.GetElapsedTime();
+                selectedTask.TaskElapsedTime = selectedTask.GetElapsedTime();
                 OnPropertyChanged(nameof(TaskElapsedTime));
                 OnPropertyChanged(nameof(SelectedTask));
             }

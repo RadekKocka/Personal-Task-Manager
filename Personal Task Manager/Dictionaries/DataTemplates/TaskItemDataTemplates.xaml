@@ -13,7 +13,7 @@
     <converters:DateTimeCultureConverter x:Key="DateTimeCultureConverter" />
     <converters:ImportanceBackgroundConverter x:Key="ImportanceBackgroundConverter" />
 
-    <DataTemplate x:Key="TaskItemDataTemplate" DataType="{x:Type local:TaskItem}">
+    <DataTemplate x:Key="TaskItemDataTemplate" DataType="{x:Type viewModels:TaskItemViewModel}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -43,7 +43,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TaskItemDetailsDataTemplate" DataType="{x:Type local:TaskItem}">
+    <DataTemplate x:Key="TaskItemDetailsDataTemplate" DataType="{x:Type viewModels:TaskItemViewModel}">
         <StackPanel Margin="20">
             <Grid Margin="0 0 0 15">
                 <Grid.ColumnDefinitions>

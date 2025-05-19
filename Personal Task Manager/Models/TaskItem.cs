@@ -14,11 +14,11 @@ namespace Personal_Task_Manager.Models
         public DateTime EndDate { get; set; }
         public bool Deleted { get; set; }
         public bool Archived { get; set; }
-        public TimeSpan Timer { get; set; }
+        public TimeSpan TaskElapsedTime { get; set; }
         public TaskState State { get; set; }
         public TaskCategory Category { get; set; }
         public TaskImportance Importance { get; set; }
-        public ObservableCollection<TaskCheckListViewModel> SubTasks { get; set; } = [];
+        public List<TaskCheckList> SubTasks { get; set; } = [];
 
         public void CompleteTask()
         {

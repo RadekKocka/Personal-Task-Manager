@@ -71,11 +71,8 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" 
-                            Command="{Binding CompleteTaskCommand}"
-                            CommandParameter="{Binding SelectedTask}"
-                            Width="100" Height="100"
-                            Content="Complete Task" />
+                    <Button Grid.Column="0" Command="{Binding CompleteTaskCommand}"
+                            CommandParameter="{Binding SelectedTask}" Width="100" Height="100" Content="Complete Task" />
                 </Grid>
             </Grid>
         </Border>
