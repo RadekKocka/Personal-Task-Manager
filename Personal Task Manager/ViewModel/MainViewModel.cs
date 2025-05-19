@@ -1,4 +1,5 @@
 ﻿using Personal_Task_Manager.Models;
+using Personal_Task_Manager.Models.Enums;
 using Personal_Task_Manager.Services;
 using Personal_Task_Manager.ViewModel.Commands;
 using Personal_Task_Manager.Views;
@@ -91,6 +92,8 @@ namespace Personal_Task_Manager.ViewModel
         {
             AddTaskWindow.AddTask(Application.Current.MainWindow);
         });
+
+        public RelayCommand<TaskItem> CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CompleteTaskCanExecute);
         #endregion
 
         #region Methods
@@ -105,6 +108,16 @@ namespace Personal_Task_Manager.ViewModel
                 Tasks.Remove(item);
                 TasksView.Refresh();
             }
+        }
+
+        private void CompleteTask(TaskItem item)
+        {
+            item.CompleteTask();
+        }
+
+        private bool CompleteTaskCanExecute(TaskItem taskItem)
+        {
+            return taskItem != null && taskItem.State is not TaskState.Complete;
         }
 
         private bool FilterTasks(object obj)
@@ -122,15 +135,7 @@ namespace Personal_Task_Manager.ViewModel
         {
             try
             {
-                if (!selectedTask.IsComplete)
-                {
-                    var elapsedTime = DateTime.Now - selectedTask.StartDate;
-                    SelectedTask.Timer = elapsedTime < TimeSpan.Zero ? TimeSpan.Zero : elapsedTime;
-                }
-                else
-                {
-                    SelectedTask.Timer = SelectedTask.EndDate - SelectedTask.StartDate;
-                }
+                selectedTask.Timer = selectedTask.GetElapsedTime();
                 OnPropertyChanged(nameof(TaskElapsedTime));
                 OnPropertyChanged(nameof(SelectedTask));
             }
