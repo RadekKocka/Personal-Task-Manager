@@ -3,12 +3,6 @@
         xmlns:converters="clr-namespace:Personal_Task_Manager.Dictionaries.Converters"
         xmlns:icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Dictionaries/Styles/ButtonStyle.xaml" />
-        <ResourceDictionary Source="/Dictionaries/Styles/TextBoxStyle.xaml" />
-        <ResourceDictionary Source="/Dictionaries/Colours.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <converters:DateTimeCultureConverter x:Key="DateTimeCultureConverter" />
     <converters:ImportanceBackgroundConverter x:Key="ImportanceBackgroundConverter" />
 
@@ -101,28 +95,7 @@
                 <CheckBox IsChecked="{Binding IsComplete}">
                     <CheckBox.Style>
                         <Style TargetType="{x:Type CheckBox}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type CheckBox}">
-                                        <Border CornerRadius="10" Background="Transparent">
-                                            <icons:MaterialIcon Kind="TickCircle" Foreground="Green">
-                                            </icons:MaterialIcon>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsComplete}" Value="False">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type CheckBox}">
-                                                <icons:MaterialIcon Kind="Circle" Foreground="White">
-                                                </icons:MaterialIcon>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
+                            <Setter Property="Template" Value="{StaticResource CheckBoxTick}" />
                         </Style>
                     </CheckBox.Style>
                 </CheckBox>
