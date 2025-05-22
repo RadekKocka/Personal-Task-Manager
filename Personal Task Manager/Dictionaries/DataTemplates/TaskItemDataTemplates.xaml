@@ -17,42 +17,22 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Title}" 
-                           FontSize="22" 
-                           FontWeight="Bold"
-                           FontFamily="Sans Serif" 
-                           VerticalAlignment="Center" 
-                           TextDecorations="Underline" />
-                <StackPanel Orientation="Horizontal" 
-                            Grid.Column="1" 
-                            HorizontalAlignment="Right">
+                <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="22" FontWeight="Bold"
+                        FontFamily="Sans Serif" VerticalAlignment="Center" TextDecorations="Underline" />
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
                     <TextBlock Text="{Binding DueDate, Converter={StaticResource DateTimeCultureConverter}}"
-                               FontSize="13" 
-                               FontFamily="Sans Serif" 
-                               VerticalAlignment="Center" 
-                               HorizontalAlignment="Right"
-                               Margin="10 0" />
-                    <Button HorizontalAlignment="Right" 
-                            VerticalAlignment="Center" 
-                            Cursor="Hand"
+                            FontSize="13" FontFamily="Sans Serif" VerticalAlignment="Center" HorizontalAlignment="Right"
+                            Margin="10 0" />
+                    <Button HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"
                             Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding}" Style="{StaticResource DeleteButtonStyle}"
-                            Content="{icons:MaterialIconExt Kind=TrashCanOutline}" 
-                            Height="25" 
-                            Width="25">
+                            Content="{icons:MaterialIconExt Kind=TrashCanOutline}" Height="25" Width="25">
                     </Button>
                 </StackPanel>
             </Grid>
-            <TextBlock Grid.Row="2" 
-                       Padding="10 0 10 8" 
-                       Text="{Binding Description}" 
-                       TextWrapping="Wrap"
-                       TextAlignment="Justify" 
-                       MinHeight="20" 
-                       MaxHeight="100" 
-                       FontSize="14" 
-                       FontFamily="Sans Serif"
-                       TextTrimming="WordEllipsis" />
+            <TextBlock Grid.Row="2" Padding="10 0 10 8" Text="{Binding Description}" TextWrapping="Wrap"
+                    TextAlignment="Justify" MinHeight="20" MaxHeight="100" FontSize="14" FontFamily="Sans Serif"
+                    TextTrimming="WordEllipsis" />
         </Grid>
     </DataTemplate>
 
@@ -63,29 +43,20 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Title}" 
-                           FontSize="22" 
-                           FontWeight="Bold"
-                           FontFamily="Sans Serif" 
-                           HorizontalAlignment="Left" 
-                           VerticalAlignment="Center"
-                           TextDecorations="Underline" />
-                <Border CornerRadius="7" 
-                        Grid.Column="1" 
-                        HorizontalAlignment="Right"
+                <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="22" FontWeight="Bold"
+                        FontFamily="Sans Serif" HorizontalAlignment="Left" VerticalAlignment="Center"
+                        TextDecorations="Underline" />
+                <Border CornerRadius="7" Grid.Column="1" HorizontalAlignment="Right"
                         Background="{Binding Importance, Converter={StaticResource ImportanceBackgroundConverter}}"
                         Width="150">
-                    <Label Content="{Binding Importance}" 
-                           HorizontalAlignment="Center" 
-                           FontSize="18"
-                           VerticalAlignment="Center" 
-                           Background="Transparent" />
+                    <Label Content="{Binding Importance}" HorizontalAlignment="Center" FontSize="18"
+                            VerticalAlignment="Center" Background="Transparent" />
                 </Border>
             </Grid>
-            <TextBlock Grid.Row="1" Text="{Binding Description}" 
-                       TextWrapping="Wrap" 
-                       DockPanel.Dock="Bottom"
-                       TextAlignment="Justify" />
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Height="80">
+                <TextBlock Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap" DockPanel.Dock="Bottom"
+                        TextAlignment="Justify" />
+            </ScrollViewer>
         </StackPanel>
     </DataTemplate>
 

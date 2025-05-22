@@ -4,12 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Personal_Task_Manager.Views"
-        xmlns:viewModel="clr-namespace:Personal_Task_Manager.ViewModel"
-        mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewModel:AddTaskViewModel}"
-        Title="Add Task" Height="450" Width="800"
+        xmlns:viewModel="clr-namespace:Personal_Task_Manager.ViewModel" mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewModel:AddTaskViewModel}" Title="Add Task" Height="800" Width="450"
         WindowStartupLocation="CenterOwner">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Label Content="Title" Target="{Binding ElementName=Title}" Style="{StaticResource Heading1}" />
+            <TextBox x:Name="Title" Height="50" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" MaxLength="100"
+                    Style="{StaticResource TextBoxStyle}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Label Content="Description" Target="{Binding ElementName=Description}" Style="{StaticResource Heading1}" />
+            <TextBox x:Name="Description" Height="100" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource TextBoxStyle}" BorderBrush="Beige" BorderThickness="1" />
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <Label Content="Importance" Target="{Binding ElementName=Description}" Style="{StaticResource Heading1}" />
+            <ComboBox x:Name="Importance" ItemsSource="{Binding Importances}" Height="auto" SelectedItem="{Binding SelectedImportance}" BorderBrush="Beige"
+                    BorderThickness="1" />
+        </StackPanel>
+        <Button Grid.Row="3" Content="Add" Command="{Binding AddTaskCommand}"/>
     </Grid>
 </Window>

@@ -8,16 +8,20 @@ namespace Personal_Task_Manager.Views
     /// </summary>
     public partial class AddTaskWindow : Window
     {
-        private AddTaskWindow()
+        public AddTaskViewModel ViewModel { get; }
+        public AddTaskWindow(Window owner)
         {
             InitializeComponent();
-            DataContext = new AddTaskViewModel();
+            ViewModel = new AddTaskViewModel();
+            DataContext = ViewModel;
+            Owner = owner;
+            ViewModel.TaskCreated += OnTaskCreated;
         }
 
-        public static void AddTask(Window parentWindow)
+        private void OnTaskCreated()
         {
-            AddTaskWindow window = new();
-            window.ShowDialog();
+            DialogResult = true;
+            Close();
         }
     }
 }

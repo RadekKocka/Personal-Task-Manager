@@ -79,7 +79,16 @@ namespace Personal_Task_Manager.ViewModel
         public ICommand DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
         public ICommand AddTaskCommand => new RelayCommand(_ =>
         {
-            AddTaskWindow.AddTask(Application.Current.MainWindow);
+            var addTaskWindow = new AddTaskWindow(Application.Current.MainWindow);
+            if (addTaskWindow.ShowDialog() == true)
+            {
+                var task = addTaskWindow.ViewModel.CreatedTask;
+                if (task != null)
+                {
+                    Tasks.Add(task);
+                    TasksView.Refresh();
+                }
+            }
         });
         public ICommand CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CanCompleteTask);
         #endregion
