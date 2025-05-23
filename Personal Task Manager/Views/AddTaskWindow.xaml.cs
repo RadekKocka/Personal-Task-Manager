@@ -1,4 +1,6 @@
-﻿using Personal_Task_Manager.ViewModel;
+﻿using Personal_Task_Manager.Models;
+using Personal_Task_Manager.ViewModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Personal_Task_Manager.Views
@@ -9,19 +11,20 @@ namespace Personal_Task_Manager.Views
     public partial class AddTaskWindow : Window
     {
         public AddTaskViewModel ViewModel { get; }
-        public AddTaskWindow(Window owner)
+        public AddTaskWindow(Window owner, ObservableCollection<TaskItem> taskItems)
         {
             InitializeComponent();
-            ViewModel = new AddTaskViewModel();
+            ViewModel = new AddTaskViewModel(taskItems);
             DataContext = ViewModel;
             Owner = owner;
             ViewModel.TaskCreated += OnTaskCreated;
         }
-
-        private void OnTaskCreated()
+        private void OnTaskCreated(object? sender, TaskCreatedArgs e)
         {
-            DialogResult = true;
-            Close();
+            if (e.CloseWindow)
+            {
+                DialogResult = true;
+            }
         }
     }
 }

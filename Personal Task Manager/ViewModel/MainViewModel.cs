@@ -79,16 +79,8 @@ namespace Personal_Task_Manager.ViewModel
         public ICommand DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
         public ICommand AddTaskCommand => new RelayCommand(_ =>
         {
-            var addTaskWindow = new AddTaskWindow(Application.Current.MainWindow);
-            if (addTaskWindow.ShowDialog() == true)
-            {
-                var task = addTaskWindow.ViewModel.CreatedTask;
-                if (task != null)
-                {
-                    Tasks.Add(task);
-                    TasksView.Refresh();
-                }
-            }
+            var addTaskWindow = new AddTaskWindow(Application.Current.MainWindow, Tasks);
+            addTaskWindow.ShowDialog();
         });
         public ICommand CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CanCompleteTask);
         #endregion
@@ -103,7 +95,6 @@ namespace Personal_Task_Manager.ViewModel
             if (MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 Tasks.Remove(item);
-                TasksView.Refresh();
             }
         }
 
@@ -135,7 +126,6 @@ namespace Personal_Task_Manager.ViewModel
             if (MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 taskItem.CompleteTask();
-                TasksView.Refresh();
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using Personal_Task_Manager.Models;
 using Personal_Task_Manager.Models.Enums;
 using Personal_Task_Manager.ViewModel.Commands;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Personal_Task_Manager.ViewModel
@@ -16,22 +17,31 @@ namespace Personal_Task_Manager.ViewModel
         public TaskCategory SelectedCategory { get; set; }
         public DateTime? DueDate { get; set; }
 
-        public TaskItem CreatedTask { get; set; }
+        private ObservableCollection<TaskItem> _taskItems;
 
-        public event Action? TaskCreated;
+        public event EventHandler<TaskCreatedArgs>? TaskCreated;
 
-        public ICommand AddTaskCommand => new RelayCommand(_ => AddTask(), _ => CanAddTask());
+        public ICommand AddTaskCommand => new RelayCommand(_ => AddTask(false), _ => CanAddTask());
+        public ICommand AddTaskAndCloseCommand => new RelayCommand(_ => AddTask(true), _ => CanAddTask());
+        public ICommand CancelCommand => new RelayCommand(_ => Cancel());
 
-        public AddTaskViewModel()
+        public AddTaskViewModel(ObservableCollection<TaskItem> taskItems)
         {
             Categories = Enum.GetValues<TaskCategory>().ToList();
             Importances = Enum.GetValues<TaskImportance>().ToList();
 
             SelectedImportance = TaskImportance.Medium;
             SelectedCategory = TaskCategory.Work;
+
+            _taskItems = taskItems;
         }
 
-        public void AddTask()
+        public void Cancel()
+        {
+            OnTaskCreated(true);
+        }
+
+        public void AddTask(bool closeWindow)
         {
             var task = new TaskItem
             {
@@ -43,14 +53,28 @@ namespace Personal_Task_Manager.ViewModel
                 Category = SelectedCategory,
                 Importance = SelectedImportance
             };
-            CreatedTask = task;
+            _taskItems.Add(task);
 
-            TaskCreated?.Invoke();
+            OnTaskCreated(closeWindow);
+        }
+
+        public void OnTaskCreated(bool closeWindow)
+        {
+            TaskCreated?.Invoke(this, new TaskCreatedArgs(closeWindow));
         }
 
         private bool CanAddTask()
         {
             return !string.IsNullOrWhiteSpace(Title);
+        }
+    }
+
+    public class TaskCreatedArgs
+    {
+        public bool CloseWindow { get; set; }
+        public TaskCreatedArgs(bool closeWindow)
+        {
+            CloseWindow = closeWindow;
         }
     }
 }

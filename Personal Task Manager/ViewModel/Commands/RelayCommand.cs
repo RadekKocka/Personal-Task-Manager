@@ -20,12 +20,12 @@ namespace Personal_Task_Manager.ViewModel.Commands
         }
 
 
-        public bool CanExecute(object? canExecute = null)
+        public virtual bool CanExecute(object? canExecute = null)
         {
             return _canExecute == null || _canExecute(canExecute);
         }
 
-        public void Execute(object? execute)
+        public virtual void Execute(object? execute)
         {
             _execute(execute);
         }
@@ -49,12 +49,12 @@ namespace Personal_Task_Manager.ViewModel.Commands
         }
 
 
-        public bool CanExecute(object? canExecute = null)
+        public virtual bool CanExecute(object? canExecute = null)
         {
             return _canExecute == null || _canExecute((T)canExecute);
         }
 
-        public void Execute(object? execute)
+        public virtual void Execute(object? execute)
         {
             _execute((T)execute);
         }
