@@ -1,5 +1,6 @@
 ﻿using Personal_Task_Manager.Models;
 using Personal_Task_Manager.Models.Enums;
+using Personal_Task_Manager.Services;
 using Personal_Task_Manager.ViewModel.Commands;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -13,9 +14,11 @@ namespace Personal_Task_Manager.ViewModel
         public List<TaskImportance> Importances { get; }
         public List<TaskCategory> Categories { get; }
 
-        public TaskImportance SelectedImportance { get; set; }
-        public TaskCategory SelectedCategory { get; set; }
+        public TaskImportance? SelectedImportance { get; set; }
+        public TaskCategory? SelectedCategory { get; set; }
         public DateTime? DueDate { get; set; }
+
+        private List<TaskCheckList> subTasks = new List<TaskCheckList>();
 
         private ObservableCollection<TaskItem> _taskItems;
 
@@ -30,8 +33,8 @@ namespace Personal_Task_Manager.ViewModel
             Categories = Enum.GetValues<TaskCategory>().ToList();
             Importances = Enum.GetValues<TaskImportance>().ToList();
 
-            SelectedImportance = TaskImportance.Medium;
-            SelectedCategory = TaskCategory.Work;
+            SelectedCategory = null;
+            SelectedImportance = null;
 
             _taskItems = taskItems;
         }
@@ -43,16 +46,16 @@ namespace Personal_Task_Manager.ViewModel
 
         public void AddTask(bool closeWindow)
         {
-            var task = new TaskItem
-            {
-                Title = Title,
-                Description = Description,
-                DueDate = DueDate,
-                StartDate = DateTime.Now,
-                State = TaskState.InProgress,
-                Category = SelectedCategory,
-                Importance = SelectedImportance
-            };
+            var task = TaskItemBuilder.Create()
+                .WithTitle(Title ?? string.Empty)
+                .WithDescription(Description ?? string.Empty)
+                .WithDueDate(DueDate)
+                .WithState(TaskState.InProgress)
+                .WithCategory(SelectedCategory!.Value)
+                .WithImportance(SelectedImportance!.Value)
+                .WithSubTasks(subTasks)
+                .Build();
+
             _taskItems.Add(task);
 
             OnTaskCreated(closeWindow);
@@ -65,7 +68,10 @@ namespace Personal_Task_Manager.ViewModel
 
         private bool CanAddTask()
         {
-            return !string.IsNullOrWhiteSpace(Title);
+            return !string.IsNullOrWhiteSpace(Title) 
+                   && !_taskItems.Any(x => x.Title.Equals(Title, StringComparison.InvariantCultureIgnoreCase))
+                   && SelectedCategory is not null
+                   && SelectedImportance is not null;
         }
     }
 
