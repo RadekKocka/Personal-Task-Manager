@@ -9,8 +9,8 @@ namespace Personal_Task_Manager.ViewModel
 {
     public class AddTaskViewModel
     {
-        public string? Title { get; set; }
-        public string? Description { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public List<TaskImportance> Importances { get; }
         public List<TaskCategory> Categories { get; }
 
@@ -56,6 +56,8 @@ namespace Personal_Task_Manager.ViewModel
                 .WithSubTasks(subTasks)
                 .Build();
 
+            task.SubTasks.ForEach(subTask => subTask.Subscribe(task));
+
             _taskItems.Add(task);
 
             OnTaskCreated(closeWindow);
@@ -72,6 +74,11 @@ namespace Personal_Task_Manager.ViewModel
                    && !_taskItems.Any(x => x.Title.Equals(Title, StringComparison.InvariantCultureIgnoreCase))
                    && SelectedCategory is not null
                    && SelectedImportance is not null;
+        }
+
+        public void Dispose()
+        {
+            _taskItems.Clear();
         }
     }
 

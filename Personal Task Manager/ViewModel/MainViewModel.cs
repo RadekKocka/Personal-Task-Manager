@@ -125,6 +125,7 @@ namespace Personal_Task_Manager.ViewModel
             var caption = "Complete task";
             if (MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
+                taskItem.CompleteSubTasks();
                 taskItem.CompleteTask();
             }
         }
