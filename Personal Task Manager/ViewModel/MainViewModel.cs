@@ -77,10 +77,8 @@ namespace Personal_Task_Manager.ViewModel
 
         #region Commands
         public ICommand DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
-        public ICommand AddTaskCommand => new RelayCommand(_ =>
-        {
-            AddTaskWindow.AddTask(Application.Current.MainWindow);
-        });
+        public ICommand AddTaskCommand => new RelayCommand(AddNewTask);
+
         public ICommand CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CanCompleteTask);
         #endregion
 
@@ -94,7 +92,6 @@ namespace Personal_Task_Manager.ViewModel
             if (MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 Tasks.Remove(item);
-                TasksView.Refresh();
             }
         }
 
@@ -125,14 +122,21 @@ namespace Personal_Task_Manager.ViewModel
             var caption = "Complete task";
             if (MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
+                taskItem.CompleteSubTasks();
                 taskItem.CompleteTask();
-                TasksView.Refresh();
             }
         }
 
         private bool CanCompleteTask(TaskItem taskItem)
         {
             return taskItem != null && !taskItem.IsComplete;
+        }
+
+        private void AddNewTask(object? obj)
+        {
+            var addTaskWindow = new AddTaskWindow(Application.Current.MainWindow, Tasks);
+            if (addTaskWindow.ShowDialog() is true)
+                addTaskWindow.Dispose();
         }
         #endregion
     }

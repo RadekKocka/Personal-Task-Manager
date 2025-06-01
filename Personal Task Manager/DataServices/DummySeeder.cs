@@ -8,7 +8,7 @@ namespace Personal_Task_Manager.DummyData
     {
         public static ObservableCollection<TaskItem> GetDummyTasks()
         {
-            return new ObservableCollection<TaskItem>
+            var x = new ObservableCollection<TaskItem>
             {
                 new TaskItem
                 {
@@ -29,7 +29,7 @@ namespace Personal_Task_Manager.DummyData
                         },
                         new() {
                             Description = "Subtask 2",
-                            IsComplete = true
+                            IsComplete = false
                         }
                     }
                 },
@@ -47,6 +47,10 @@ namespace Personal_Task_Manager.DummyData
                     SubTasks = []
                 }
             };
+
+            x[0].SubTasks.ForEach(subTask => subTask.Subscribe(x[0]));
+
+            return x;
         }
     }
 }

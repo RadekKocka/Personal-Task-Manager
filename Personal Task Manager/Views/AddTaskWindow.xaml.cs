@@ -1,4 +1,6 @@
-﻿using Personal_Task_Manager.ViewModel;
+﻿using Personal_Task_Manager.Models;
+using Personal_Task_Manager.ViewModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Personal_Task_Manager.Views
@@ -6,18 +8,28 @@ namespace Personal_Task_Manager.Views
     /// <summary>
     /// Interaction logic for AddTaskWindow.xaml
     /// </summary>
-    public partial class AddTaskWindow : Window
+    public partial class AddTaskWindow : Window, IDisposable
     {
-        private AddTaskWindow()
+        public AddTaskViewModel ViewModel { get; }
+        public AddTaskWindow(Window owner, ObservableCollection<TaskItem> taskItems)
         {
             InitializeComponent();
-            DataContext = new AddTaskViewModel();
+            ViewModel = new AddTaskViewModel(taskItems);
+            DataContext = ViewModel;
+            Owner = owner;
+            ViewModel.TaskCreated += OnTaskCreated;
+        }
+        private void OnTaskCreated(object? sender, TaskCreatedArgs e)
+        {
+            if (e.CloseWindow)
+            {
+                DialogResult = true;
+            }
         }
 
-        public static void AddTask(Window parentWindow)
+        public void Dispose()
         {
-            AddTaskWindow window = new();
-            window.ShowDialog();
+            ViewModel.TaskCreated -= OnTaskCreated;
         }
     }
 }

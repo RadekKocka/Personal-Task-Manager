@@ -2,12 +2,12 @@
 
 namespace Personal_Task_Manager.Models
 {
-    public class TaskItem
+    public class TaskItem : IObserver<TaskItem>
     {
         public int Id { get; set; }
-        public required string Title { get; set; }
-        public string? Description { get; set; }
-        public DateTime DueDate { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public DateTime? DueDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool IsComplete => State == TaskState.Complete;
@@ -20,11 +20,15 @@ namespace Personal_Task_Manager.Models
         public void CompleteTask()
         {
             State = TaskState.Complete;
+            EndDate = DateTime.Now;
+        }
+
+        public void CompleteSubTasks()
+        {
             foreach (var subTask in SubTasks)
             {
                 subTask.IsComplete = true;
             }
-            EndDate = DateTime.Now;
         }
 
         public TimeSpan GetTaskElapsedTime()
@@ -39,6 +43,24 @@ namespace Personal_Task_Manager.Models
                     return TimeSpan.Zero;
 
                 return DateTime.Now - StartDate;
+            }
+        }
+
+        public void OnCompleted()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNext(TaskItem value)
+        {
+            if (SubTasks.All(subtask => subtask.IsComplete))
+            {
+                CompleteTask();
             }
         }
     }
