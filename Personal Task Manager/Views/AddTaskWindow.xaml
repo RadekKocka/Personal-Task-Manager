@@ -9,7 +9,8 @@
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         AllowsTransparency="True"
         Background="Transparent"
-        WindowStyle="None">
+        WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Border Padding="24" Background="{DynamicResource AccentDarkOver}" CornerRadius="12">
         <Grid>
             <Grid.RowDefinitions>
@@ -29,7 +30,7 @@
             <StackPanel Grid.Row="0" Margin="0,0,0,12">
                 <Label Content="Title" Target="{Binding ElementName=TitleBox}" Style="{StaticResource Heading1}" />
                 <TextBox x:Name="TitleBox" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" MaxLength="100"
-                        Style="{StaticResource TextBoxStyle}" />
+                         Style="{StaticResource TextBoxStyle}"/>
             </StackPanel>
 
             <!-- Description -->
@@ -66,9 +67,9 @@
 
             <!-- Buttons -->
             <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,24,0,0">
-                <Button Content="Save" Command="{Binding AddTaskCommand}" Style="{StaticResource AddTaskButtonStyle}"
+                <Button Content="Save" Command="{Binding SaveTaskCommand}" Style="{StaticResource AddTaskButtonStyle}"
                         Margin="0,0,12,0" />
-                <Button Content="Save and Close" Command="{Binding AddTaskAndCloseCommand}"
+                <Button Content="Save and Close" Command="{Binding SaveTaskAndCloseWindowCommand}"
                         Style="{StaticResource AddTaskButtonStyle}" 
                         Margin="0 0 12 0"/>
                 <Button Margin="0 0 12 0" Content="Cancel" Command="{Binding CancelCommand}"

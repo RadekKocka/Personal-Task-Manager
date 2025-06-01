@@ -28,6 +28,11 @@
                             CommandParameter="{Binding}" Style="{StaticResource DeleteButtonStyle}"
                             Content="{icons:MaterialIconExt Kind=TrashCanOutline}" Height="25" Width="25">
                     </Button>
+                    <Button HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"
+                            Command="{Binding DataContext.EditTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding}" Style="{StaticResource EditButtontyle}"
+                            Content="{icons:MaterialIconExt Kind=EditOutline}" Height="25" Width="25">
+                    </Button>
                 </StackPanel>
             </Grid>
             <TextBlock Grid.Row="2" Padding="10 0 10 8" Text="{Binding Description}" TextWrapping="Wrap"

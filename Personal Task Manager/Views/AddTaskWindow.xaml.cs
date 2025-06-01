@@ -11,15 +11,28 @@ namespace Personal_Task_Manager.Views
     public partial class AddTaskWindow : Window, IDisposable
     {
         public AddTaskViewModel ViewModel { get; }
-        public AddTaskWindow(Window owner, ObservableCollection<TaskItem> taskItems)
+        private AddTaskWindow(Window owner, AddTaskViewModel addTaskViewModel)
         {
             InitializeComponent();
-            ViewModel = new AddTaskViewModel(taskItems);
+            ViewModel = addTaskViewModel;
             DataContext = ViewModel;
             Owner = owner;
-            ViewModel.TaskCreated += OnTaskCreated;
+            ViewModel.TaskCreated += OnTaskSaved;
         }
-        private void OnTaskCreated(object? sender, TaskCreatedArgs e)
+
+        public static AddTaskWindow CreateWindow(ObservableCollection<TaskItem> taskItems, TaskItem taskItem, Window owner)
+        {
+            var vm = new AddTaskViewModel(taskItems, taskItem);
+            return new AddTaskWindow(owner, vm);
+        }
+
+        public static AddTaskWindow CreateWindow(ObservableCollection<TaskItem> taskItems, Window owner)
+        {
+            var vm = new AddTaskViewModel(taskItems);
+            return new AddTaskWindow(owner, vm);
+        }
+
+        private void OnTaskSaved(object? sender, TaskCreatedArgs e)
         {
             if (e.CloseWindow)
             {
@@ -29,7 +42,15 @@ namespace Personal_Task_Manager.Views
 
         public void Dispose()
         {
-            ViewModel.TaskCreated -= OnTaskCreated;
+            ViewModel.TaskCreated -= OnTaskSaved;
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
+            {
+                DragMove();
+            }
         }
     }
 }

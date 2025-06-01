@@ -52,6 +52,10 @@ namespace Personal_Task_Manager.Services
         public TaskItemBuilder WithSubTasks(List<TaskCheckList> subTasks)
         {
             _taskItem.SubTasks = subTasks;
+            foreach (var subTask in _taskItem.SubTasks)
+            {
+                subTask.Subscribe(_taskItem);
+            }
             return this;
         }
 

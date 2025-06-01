@@ -80,6 +80,9 @@ namespace Personal_Task_Manager.ViewModel
         public ICommand AddTaskCommand => new RelayCommand(AddNewTask);
 
         public ICommand CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CanCompleteTask);
+
+        public ICommand EditTaskCommand => new RelayCommand<TaskItem>(EditTask);
+
         #endregion
 
         #region Methods
@@ -134,10 +137,19 @@ namespace Personal_Task_Manager.ViewModel
 
         private void AddNewTask(object? obj)
         {
-            var addTaskWindow = new AddTaskWindow(Application.Current.MainWindow, Tasks);
+            var addTaskWindow = AddTaskWindow.CreateWindow(Tasks, App.Current.MainWindow);
             if (addTaskWindow.ShowDialog() is true)
                 addTaskWindow.Dispose();
         }
+
+        private void EditTask(TaskItem item)
+        {
+            var editTaskWindow = AddTaskWindow.CreateWindow(Tasks, item, App.Current.MainWindow);
+            if (editTaskWindow.ShowDialog() == true)
+                editTaskWindow.Dispose();
+            tasksView.Refresh();
+        }
+
         #endregion
     }
 }
