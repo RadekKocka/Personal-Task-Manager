@@ -8,7 +8,7 @@ namespace Personal_Task_Manager.Views
     /// <summary>
     /// Interaction logic for AddTaskWindow.xaml
     /// </summary>
-    public partial class AddTaskWindow : Window
+    public partial class AddTaskWindow : Window, IDisposable
     {
         public AddTaskViewModel ViewModel { get; }
         public AddTaskWindow(Window owner, ObservableCollection<TaskItem> taskItems)
@@ -25,6 +25,11 @@ namespace Personal_Task_Manager.Views
             {
                 DialogResult = true;
             }
+        }
+
+        public void Dispose()
+        {
+            ViewModel.TaskCreated -= OnTaskCreated;
         }
     }
 }

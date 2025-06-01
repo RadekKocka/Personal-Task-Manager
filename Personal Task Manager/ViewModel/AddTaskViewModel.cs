@@ -18,7 +18,7 @@ namespace Personal_Task_Manager.ViewModel
         public TaskCategory? SelectedCategory { get; set; }
         public DateTime? DueDate { get; set; }
 
-        private List<TaskCheckList> subTasks = new List<TaskCheckList>();
+        private List<TaskCheckList> SubTasks = new List<TaskCheckList>();
 
         private ObservableCollection<TaskItem> _taskItems;
 
@@ -47,13 +47,13 @@ namespace Personal_Task_Manager.ViewModel
         public void AddTask(bool closeWindow)
         {
             var task = TaskItemBuilder.Create()
-                .WithTitle(Title ?? string.Empty)
+                .WithTitle(Title)
                 .WithDescription(Description ?? string.Empty)
                 .WithDueDate(DueDate)
                 .WithState(TaskState.InProgress)
                 .WithCategory(SelectedCategory!.Value)
                 .WithImportance(SelectedImportance!.Value)
-                .WithSubTasks(subTasks)
+                .WithSubTasks(SubTasks)
                 .Build();
 
             task.SubTasks.ForEach(subTask => subTask.Subscribe(task));

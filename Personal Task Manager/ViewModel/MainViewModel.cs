@@ -77,11 +77,8 @@ namespace Personal_Task_Manager.ViewModel
 
         #region Commands
         public ICommand DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
-        public ICommand AddTaskCommand => new RelayCommand(_ =>
-        {
-            var addTaskWindow = new AddTaskWindow(Application.Current.MainWindow, Tasks);
-            addTaskWindow.ShowDialog();
-        });
+        public ICommand AddTaskCommand => new RelayCommand(AddNewTask);
+
         public ICommand CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CanCompleteTask);
         #endregion
 
@@ -133,6 +130,13 @@ namespace Personal_Task_Manager.ViewModel
         private bool CanCompleteTask(TaskItem taskItem)
         {
             return taskItem != null && !taskItem.IsComplete;
+        }
+
+        private void AddNewTask(object? obj)
+        {
+            var addTaskWindow = new AddTaskWindow(Application.Current.MainWindow, Tasks);
+            if (addTaskWindow.ShowDialog() is true)
+                addTaskWindow.Dispose();
         }
         #endregion
     }
