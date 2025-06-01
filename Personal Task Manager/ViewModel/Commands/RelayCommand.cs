@@ -34,9 +34,9 @@ namespace Personal_Task_Manager.ViewModel.Commands
     public class RelayCommand<T> : ICommand
     {
         public Action<T> _execute;
-        public Predicate<T?>? _canExecute;
+        public Predicate<T> _canExecute;
 
-        public RelayCommand(Action<T> execute, Predicate<T?>? canExecute = null)
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
