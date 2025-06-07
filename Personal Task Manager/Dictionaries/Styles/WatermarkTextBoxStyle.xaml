@@ -30,7 +30,8 @@
                                      FontFamily="{TemplateBinding FontFamily}"
                                      FontWeight="{TemplateBinding FontWeight}"
                                      VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                     MaxLength="40"/>
+                                     MaxLength="{Binding MaxLength, RelativeSource={RelativeSource TemplatedParent}}"
+                                     TextWrapping="{Binding TextWrapping, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <TextBlock Text="{TemplateBinding Watermark}" 
                                        Foreground="{TemplateBinding WatermarkForeground}"
                                        Visibility="{TemplateBinding Text, Converter={StaticResource StringToVisibilityConverter}}"

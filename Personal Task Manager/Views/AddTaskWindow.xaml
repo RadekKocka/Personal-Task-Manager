@@ -7,16 +7,13 @@
         xmlns:viewModel="clr-namespace:Personal_Task_Manager.ViewModel"
         xmlns:controls="clr-namespace:Personal_Task_Manager.Controls" mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModel:AddTaskViewModel}" Title="Add Task" Height="600" Width="420"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
-        AllowsTransparency="True"
-        Background="Transparent"
-        WindowStyle="None"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Border Padding="24" CornerRadius="12">
         <Border.Background>
             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1" ColorInterpolationMode="SRgbLinearInterpolation"
-                    MappingMode="RelativeToBoundingBox" >
-                <GradientStop Color="{StaticResource AccentDarkColor}" Offset="1"/>
+                    MappingMode="RelativeToBoundingBox">
+                <GradientStop Color="{StaticResource AccentDarkColor}" Offset="1" />
                 <GradientStop Color="{StaticResource AccentDarkOverColor}" Offset="0.5" />
                 <GradientStop Color="{StaticResource AccentDarkClickColor}" Offset="0.3" />
             </LinearGradientBrush>
@@ -36,33 +33,37 @@
             </Grid.ColumnDefinitions>
 
             <!-- Title -->
-            <StackPanel Grid.Row="0" Margin="0,0,0,12" >
+            <StackPanel Grid.Row="0" Margin="0,0,0,12">
                 <Label Content="Title" Target="{Binding ElementName=TitleBox}" Style="{StaticResource Heading1}" />
                 <controls:WatermarkTextBox x:Name="TitleBox" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
-                        MaxLength="100" Watermark="Set a title..." Height="25" VerticalAlignment="Center" Padding="3 0 0 0"/>
+                        MaxLength="100" Watermark="Set a title..." Height="25" VerticalAlignment="Center"
+                        Padding="3 0 0 0" />
             </StackPanel>
 
             <!-- Description -->
             <StackPanel Grid.Row="1" Margin="0,0,0,12">
                 <Label Content="Description" Target="{Binding ElementName=DescriptionBox}"
                         Style="{StaticResource Heading1}" />
-                <controls:WatermarkTextBox x:Name="DescriptionBox" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                        Height="80" AcceptsReturn="True" TextWrapping="Wrap" Watermark="Description..." VerticalAlignment="Top" Padding="3 3 0 0"/>
+                <controls:WatermarkTextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Height="80"
+                        AcceptsReturn="True" TextWrapping="Wrap" Watermark="Description..." VerticalAlignment="Top"
+                        Padding="3 3 0 0" />
             </StackPanel>
 
             <!-- Category -->
             <StackPanel Grid.Row="2" Margin="0,0,0,12">
                 <Label Content="Category" Target="{Binding ElementName=CategoryBox}" Style="{StaticResource Heading1}" />
-                <ComboBox x:Name="CategoryBox" ItemsSource="{Binding Categories}"
-                        SelectedItem="{Binding SelectedCategory}"/>
+                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"
+                        Style="{StaticResource ComboboxStyle}"
+                        ItemContainerStyle="{StaticResource CustomComboBoxItemStyle}" />
             </StackPanel>
 
             <!-- Importance -->
             <StackPanel Grid.Row="3" Margin="0,0,0,12">
                 <Label Content="Importance" Target="{Binding ElementName=ImportanceBox}"
                         Style="{StaticResource Heading1}" />
-                <ComboBox x:Name="ImportanceBox" ItemsSource="{Binding Importances}"
-                        SelectedItem="{Binding SelectedImportance}" />
+                <ComboBox ItemsSource="{Binding Importances}" SelectedItem="{Binding SelectedImportance}"
+                        Style="{StaticResource ComboboxStyle}"
+                        ItemContainerStyle="{StaticResource  CustomComboBoxItemStyle}" />
             </StackPanel>
 
             <!-- Due Date -->
@@ -79,8 +80,7 @@
                 <Button Content="Save" Command="{Binding SaveTaskCommand}" Style="{StaticResource AddTaskButtonStyle}"
                         Margin="0,0,12,0" />
                 <Button Content="Save and Close" Command="{Binding SaveTaskAndCloseWindowCommand}"
-                        Style="{StaticResource AddTaskButtonStyle}" 
-                        Margin="0 0 12 0"/>
+                        Style="{StaticResource AddTaskButtonStyle}" Margin="0 0 12 0" />
                 <Button Margin="0 0 12 0" Content="Cancel" Command="{Binding CancelCommand}"
                         Style="{StaticResource AddTaskButtonStyle}" />
             </StackPanel>
