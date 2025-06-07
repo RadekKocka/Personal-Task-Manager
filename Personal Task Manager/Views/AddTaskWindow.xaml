@@ -4,14 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Personal_Task_Manager.Views"
-        xmlns:viewModel="clr-namespace:Personal_Task_Manager.ViewModel" mc:Ignorable="d"
+        xmlns:viewModel="clr-namespace:Personal_Task_Manager.ViewModel"
+        xmlns:controls="clr-namespace:Personal_Task_Manager.Controls" mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModel:AddTaskViewModel}" Title="Add Task" Height="600" Width="420"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         AllowsTransparency="True"
         Background="Transparent"
         WindowStyle="None"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
-    <Border Padding="24" Background="{DynamicResource AccentDarkOver}" CornerRadius="12">
+    <Border Padding="24" CornerRadius="12">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1" ColorInterpolationMode="SRgbLinearInterpolation"
+                    MappingMode="RelativeToBoundingBox" >
+                <GradientStop Color="{StaticResource AccentDarkColor}" Offset="1"/>
+                <GradientStop Color="{StaticResource AccentDarkOverColor}" Offset="0.5" />
+                <GradientStop Color="{StaticResource AccentDarkClickColor}" Offset="0.3" />
+            </LinearGradientBrush>
+        </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -27,18 +36,18 @@
             </Grid.ColumnDefinitions>
 
             <!-- Title -->
-            <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <StackPanel Grid.Row="0" Margin="0,0,0,12" >
                 <Label Content="Title" Target="{Binding ElementName=TitleBox}" Style="{StaticResource Heading1}" />
-                <TextBox x:Name="TitleBox" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" MaxLength="100"
-                         Style="{StaticResource TextBoxStyle}"/>
+                <controls:WatermarkTextBox x:Name="TitleBox" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
+                        MaxLength="100" Watermark="Set a title..." Height="25" VerticalAlignment="Center" Padding="3 0 0 0"/>
             </StackPanel>
 
             <!-- Description -->
             <StackPanel Grid.Row="1" Margin="0,0,0,12">
                 <Label Content="Description" Target="{Binding ElementName=DescriptionBox}"
                         Style="{StaticResource Heading1}" />
-                <TextBox x:Name="DescriptionBox" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                        Height="80" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource TextBoxStyle}" />
+                <controls:WatermarkTextBox x:Name="DescriptionBox" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                        Height="80" AcceptsReturn="True" TextWrapping="Wrap" Watermark="Description..." VerticalAlignment="Top" Padding="3 3 0 0"/>
             </StackPanel>
 
             <!-- Category -->

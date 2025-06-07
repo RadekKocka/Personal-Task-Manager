@@ -22,7 +22,6 @@
                         <Grid>
                             <TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}" 
                                      Panel.ZIndex="0"
-                                     VerticalAlignment="Center"
                                      Background="Transparent"
                                      BorderThickness="0"
                                      Foreground="Black"
@@ -30,18 +29,19 @@
                                      FontSize="{TemplateBinding FontSize}"
                                      FontFamily="{TemplateBinding FontFamily}"
                                      FontWeight="{TemplateBinding FontWeight}"
+                                     VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                      MaxLength="40"/>
                             <TextBlock Text="{TemplateBinding Watermark}" 
                                        Foreground="{TemplateBinding WatermarkForeground}"
                                        Visibility="{TemplateBinding Text, Converter={StaticResource StringToVisibilityConverter}}"
                                        IsHitTestVisible="False"
                                        Panel.ZIndex="1"
-                                       VerticalAlignment="Center"
                                        Background="Transparent"
-                                       Padding="{TemplateBinding Padding, Converter={StaticResource WatermarkPaddingConverter}}"
+                                       Padding="{TemplateBinding Padding, Converter={StaticResource WatermarkPaddingConverter}, ConverterParameter={TemplateBinding VerticalAlignment}}"
                                        FontSize="{TemplateBinding FontSize}"
                                        FontFamily="{TemplateBinding FontFamily}"
-                                       FontWeight="{TemplateBinding FontWeight}"/>
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

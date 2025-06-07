@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -23,7 +24,6 @@ namespace Personal_Task_Manager.Controls
 
         public static readonly DependencyProperty WatermarkForegroundProperty =
             DependencyProperty.Register(nameof(WatermarkForeground), typeof(SolidColorBrush), typeof(WatermarkTextBox), new PropertyMetadata(Brushes.Gray));
-
 
         static WatermarkTextBox()
         {

@@ -9,10 +9,13 @@ namespace Personal_Task_Manager.Dictionaries.Converters
         {
             if (value is Thickness thickness)
             {
-                if (parameter is null)
-                    return new Thickness(thickness.Left + 3);
+                if (parameter is null || parameter is VerticalAlignment verticalAlignment && verticalAlignment is VerticalAlignment.Top)
+                {
+                    thickness.Top += 3;
+                }
+                thickness.Left += 3;
             }
-            return Binding.DoNothing;
+            return thickness;
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

@@ -35,7 +35,7 @@
                 </Button>
                 <controls:WatermarkTextBox Grid.Row="1"
                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                        Watermark="Search..." MinHeight="25" Height="35" FontSize="16" Padding="5" />
+                        Watermark="Search..." MinHeight="25" Height="35" FontSize="16" Padding="5" VerticalAlignment="Center"/>
 
                 <ListBox Grid.Row="2" ItemsSource="{Binding TasksView}"
                         ItemTemplate="{StaticResource TaskItemDataTemplate}" Style="{StaticResource MainListViewStyle}"
