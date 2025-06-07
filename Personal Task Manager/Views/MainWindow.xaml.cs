@@ -19,7 +19,7 @@ namespace Personal_Task_Manager
         public MainWindow()
         {
             InitializeComponent();
-            _dataProvider = new CsvDataProvider();
+            _dataProvider = new JsonFileProvider();
             try
             {
                 _viewModel = new MainViewModel(_dataProvider);

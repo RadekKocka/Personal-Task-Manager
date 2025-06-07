@@ -20,7 +20,7 @@
         <Border Grid.Column="0" x:Name="NavPanel" Background="{StaticResource AccentDark}" />
 
         <Border Grid.Column="1" x:Name="TaskList" Background="{StaticResource TaskListBackground}">
-            <Grid Margin="10 0">
+            <Grid Margin="7 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
                     <RowDefinition Height="50" />

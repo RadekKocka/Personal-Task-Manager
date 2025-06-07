@@ -12,7 +12,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="10">
+            <Grid Grid.Row="0" Margin="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
@@ -24,14 +24,14 @@
                             FontSize="13" FontFamily="Sans Serif" VerticalAlignment="Center" HorizontalAlignment="Right"
                             Margin="10 0" />
                     <Button HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"
-                            Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                            CommandParameter="{Binding}" Style="{StaticResource DeleteButtonStyle}"
-                            Content="{icons:MaterialIconExt Kind=TrashCanOutline}" Height="25" Width="25">
-                    </Button>
-                    <Button HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"
                             Command="{Binding DataContext.EditTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding}" Style="{StaticResource EditButtontyle}"
                             Content="{icons:MaterialIconExt Kind=EditOutline}" Height="25" Width="25">
+                    </Button>
+                    <Button HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"
+                            Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding}" Style="{StaticResource DeleteButtonStyle}"
+                            Content="{icons:MaterialIconExt Kind=TrashCanOutline}" Height="25" Width="25">
                     </Button>
                 </StackPanel>
             </Grid>

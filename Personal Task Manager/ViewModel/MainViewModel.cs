@@ -1,4 +1,5 @@
 ﻿using Personal_Task_Manager.DataServices;
+using Personal_Task_Manager.DummyData;
 using Personal_Task_Manager.Models;
 using Personal_Task_Manager.Services;
 using Personal_Task_Manager.ViewModel.Commands;
@@ -26,6 +27,7 @@ namespace Personal_Task_Manager.ViewModel
         {
             ArgumentNullException.ThrowIfNull(dataProvider);
             Tasks = new ObservableCollection<TaskItem>(dataProvider.LoadData());
+            //Tasks = DummySeeder.GetDummyTasks();
             TasksView = CollectionViewSource.GetDefaultView(Tasks);
             TasksView.Filter = FilterTasks;
             timer = new TaskTimerService(UpdateTimes);

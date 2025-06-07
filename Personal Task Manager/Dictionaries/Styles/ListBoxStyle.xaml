@@ -61,7 +61,7 @@
                                 VerticalAlignment="Stretch" 
                                 HorizontalAlignment="Stretch" 
                                 CornerRadius="4" 
-                                Margin="8"
+                                Margin="5 3"
                                 RenderTransformOrigin="0.5 0.5">
                             <Border.RenderTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
