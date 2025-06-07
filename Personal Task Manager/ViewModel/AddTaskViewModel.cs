@@ -27,12 +27,11 @@ namespace Personal_Task_Manager.ViewModel
 
         private ObservableCollection<TaskItem> _taskItems;
 
-        public event EventHandler<TaskCreatedArgs>? TaskCreated;
+        public event EventHandler<bool> TaskEntryFinished;
         #endregion
 
         #region Commands
-        public ICommand SaveTaskCommand => new RelayCommand(_ => SaveTask(false), _ => CanAddTask());
-        public ICommand SaveTaskAndCloseWindowCommand => new RelayCommand(_ => SaveTask(true), _ => CanAddTask());
+        public ICommand SaveTaskCommand => new RelayCommand(_ => SaveTask(), _ => CanAddTask());
         public ICommand CancelCommand => new RelayCommand(_ => Cancel());
         #endregion
 
@@ -66,10 +65,10 @@ namespace Personal_Task_Manager.ViewModel
 
         public void Cancel()
         {
-            OnTaskCreated(true);
+            OnTaskEntryFinished(true);
         }
 
-        public void SaveTask(bool closeWindow)
+        public void SaveTask()
         {
             if (_taskItem is not null)
             {
@@ -80,11 +79,6 @@ namespace Personal_Task_Manager.ViewModel
                 _taskItem.Category = SelectedCategory!.Value;
                 _taskItem.Importance = SelectedImportance!.Value;
                 _taskItem.SubTasks = SubTasks;
-                var index = _taskItems.IndexOf(_taskItem);
-                if (index >= 0)
-                {
-                    _taskItems[index] = _taskItem;
-                }
             }
             else
             {
@@ -101,12 +95,12 @@ namespace Personal_Task_Manager.ViewModel
                 _taskItems.Add(task);
             }
 
-            OnTaskCreated(closeWindow);
+            OnTaskEntryFinished(false);
         }
 
-        public void OnTaskCreated(bool closeWindow)
+        public void OnTaskEntryFinished(bool canceled)
         {
-            TaskCreated?.Invoke(this, new TaskCreatedArgs(closeWindow));
+            TaskEntryFinished?.Invoke(this, canceled);
         }
 
         private bool CanAddTask()
@@ -127,15 +121,6 @@ namespace Personal_Task_Manager.ViewModel
         public void Dispose()
         {
             _taskItems.Clear();
-        }
-    }
-
-    public class TaskCreatedArgs
-    {
-        public bool CloseWindow { get; set; }
-        public TaskCreatedArgs(bool closeWindow)
-        {
-            CloseWindow = closeWindow;
         }
     }
 }

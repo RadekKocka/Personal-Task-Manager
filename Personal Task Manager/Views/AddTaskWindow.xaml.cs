@@ -17,7 +17,7 @@ namespace Personal_Task_Manager.Views
             ViewModel = addTaskViewModel;
             DataContext = ViewModel;
             Owner = owner;
-            ViewModel.TaskCreated += OnTaskSaved;
+            ViewModel.TaskEntryFinished += OnTaskSaved;
         }
 
         public static AddTaskWindow CreateWindow(ObservableCollection<TaskItem> taskItems, TaskItem taskItem, Window owner)
@@ -32,17 +32,14 @@ namespace Personal_Task_Manager.Views
             return new AddTaskWindow(owner, vm);
         }
 
-        private void OnTaskSaved(object? sender, TaskCreatedArgs e)
+        private void OnTaskSaved(object? sender, bool canceled)
         {
-            if (e.CloseWindow)
-            {
-                DialogResult = true;
-            }
+            DialogResult = !canceled;
         }
 
         public void Dispose()
         {
-            ViewModel.TaskCreated -= OnTaskSaved;
+            ViewModel.TaskEntryFinished -= OnTaskSaved;
         }
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -51,6 +48,12 @@ namespace Personal_Task_Manager.Views
             {
                 DragMove();
             }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Dispose();
         }
     }
 }

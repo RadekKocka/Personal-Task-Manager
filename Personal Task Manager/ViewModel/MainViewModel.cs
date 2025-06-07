@@ -138,15 +138,13 @@ namespace Personal_Task_Manager.ViewModel
         private void AddNewTask(object? obj)
         {
             var addTaskWindow = AddTaskWindow.CreateWindow(Tasks, App.Current.MainWindow);
-            if (addTaskWindow.ShowDialog() is true)
-                addTaskWindow.Dispose();
+            addTaskWindow.ShowDialog();
         }
 
         private void EditTask(TaskItem item)
         {
             var editTaskWindow = AddTaskWindow.CreateWindow(Tasks, item, App.Current.MainWindow);
-            if (editTaskWindow.ShowDialog() == true)
-                editTaskWindow.Dispose();
+            editTaskWindow.ShowDialog();
             tasksView.Refresh();
         }
 

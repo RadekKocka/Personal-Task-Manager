@@ -1,9 +1,10 @@
 ﻿using Personal_Task_Manager.Models.Enums;
 using Personal_Task_Manager.ViewModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Personal_Task_Manager.Models
 {
-    public class TaskItem : BaseViewModel, IObserver<TaskItem>
+    public class TaskItem : BaseViewModel, IObserver<TaskItem>, IEqualityComparer<TaskItem>
     {
         private string title = string.Empty;
         private string description = string.Empty;
@@ -124,5 +125,12 @@ namespace Personal_Task_Manager.Models
                 CompleteTask();
             }
         }
+
+        public bool Equals(TaskItem? x, TaskItem? y)
+        {
+            return x?.Title == y?.Title;
+        }
+
+        public int GetHashCode([DisallowNull] TaskItem obj) => HashCode.Combine(obj.Title.GetHashCode());
     }
 }
