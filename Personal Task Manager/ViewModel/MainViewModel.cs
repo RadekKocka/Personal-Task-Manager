@@ -1,4 +1,5 @@
-﻿using Personal_Task_Manager.Models;
+﻿using Personal_Task_Manager.DataServices;
+using Personal_Task_Manager.Models;
 using Personal_Task_Manager.Services;
 using Personal_Task_Manager.ViewModel.Commands;
 using Personal_Task_Manager.Views;
@@ -7,7 +8,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace Personal_Task_Manager.ViewModel
 {
@@ -22,10 +22,10 @@ namespace Personal_Task_Manager.ViewModel
         #endregion
 
         #region Constructor
-        public MainViewModel()
+        public MainViewModel(IDataProvider dataProvider)
         {
-            Tasks = DummyData.DummySeeder.GetDummyTasks();
-
+            ArgumentNullException.ThrowIfNull(dataProvider);
+            Tasks = new ObservableCollection<TaskItem>(dataProvider.LoadData());
             TasksView = CollectionViewSource.GetDefaultView(Tasks);
             TasksView.Filter = FilterTasks;
             timer = new TaskTimerService(UpdateTimes);
