@@ -25,6 +25,7 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      Foreground="Black"
+                                     AcceptsReturn="{TemplateBinding AcceptsReturn}"
                                      Padding="{TemplateBinding Padding}"
                                      FontSize="{TemplateBinding FontSize}"
                                      FontFamily="{TemplateBinding FontFamily}"
