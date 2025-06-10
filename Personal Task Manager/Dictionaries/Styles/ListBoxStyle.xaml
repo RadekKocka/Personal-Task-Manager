@@ -19,7 +19,7 @@
                     <Border Grid.Row="2" CornerRadius="5" BorderThickness="1"
                             BorderBrush="{StaticResource AccentDarkOver}" Background="{TemplateBinding Background}"
                             Margin="0 5">
-                        <ScrollViewer>
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                             <ItemsPresenter />
                         </ScrollViewer>
                     </Border>
