@@ -173,13 +173,14 @@ namespace Personal_Task_Manager.ViewModel
         {
             tasksView = CollectionViewSource.GetDefaultView(taskItems);
             tasksView.Filter = FilterTasks;
+            tasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.IsComplete), ListSortDirection.Ascending));
             return tasksView;
         }
 
         private void UpdateTaskFlags()
         {
             taskStateFlags = TaskState.All;
-            if (!ShowCompletedTasks) taskStateFlags &= ~TaskState.Complete;
+            taskStateFlags = ShowCompletedTasks ? taskStateFlags &= TaskState.Complete : taskStateFlags &= ~TaskState.Complete;
         }
 
         #endregion
