@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Dictionaries/Styles/BorderStyles.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles/Checkbox.Styles.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles/Combobox.Styles.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/ScrollViewer.Style.xaml"/>
 
                 <ResourceDictionary Source="Dictionaries/DataTemplates/TaskItemDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
