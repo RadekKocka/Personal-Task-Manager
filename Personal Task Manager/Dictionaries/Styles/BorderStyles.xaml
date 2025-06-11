@@ -13,10 +13,15 @@
         <Setter Property="Background" Value="{StaticResource BackgroundTaskDetails}" />
         <Setter Property="Opacity" Value="0" />
         <Setter Property="RenderTransformOrigin" Value="0 0.2" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleY="1" ScaleX="1" />
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <DataTrigger Binding="{Binding SelectedTask}" Value="{x:Null}">
                 <DataTrigger.Setters>
-                    <Setter Property="Background" Value="{StaticResource AccentDark}" />
+                    <Setter Property="Background" Value="Transparent" />
                     <Setter Property="Opacity" Value="1" />
                 </DataTrigger.Setters>
                 <DataTrigger.ExitActions>

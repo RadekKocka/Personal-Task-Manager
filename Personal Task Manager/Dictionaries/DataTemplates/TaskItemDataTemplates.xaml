@@ -1,10 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Personal_Task_Manager.Models"
-        xmlns:converters="clr-namespace:Personal_Task_Manager.Dictionaries.Converters"
         xmlns:icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF">
-
-    <converters:DateTimeCultureConverter x:Key="DateTimeCultureConverter" />
-    <converters:ImportanceBackgroundConverter x:Key="ImportanceBackgroundConverter" />
 
     <DataTemplate x:Key="TaskItemDataTemplate" DataType="{x:Type local:TaskItem}">
         <Grid>
@@ -20,7 +16,7 @@
                 <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="22" FontWeight="Bold"
                         FontFamily="Sans Serif" VerticalAlignment="Center" TextDecorations="Underline" />
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding DueDate, Converter={StaticResource DateTimeCultureConverter}}"
+                    <TextBlock Text="{Binding DueDate, Converter={StaticResource DatetimeCultureConverter}}"
                             FontSize="13" FontFamily="Sans Serif" VerticalAlignment="Center" HorizontalAlignment="Right"
                             Margin="10 0" />
                     <Button HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"

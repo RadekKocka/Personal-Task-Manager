@@ -10,6 +10,13 @@
         d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}" mc:Ignorable="d"
         Title="MainWindow" Height="832" Width="1280" MinWidth="805" MinHeight="600" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
+                <GradientStop Color="{StaticResource AccentDarkColor}" Offset="0.3" />
+                <GradientStop Color="{StaticResource AccentDarkOverColor}" Offset="0.6" />
+                <GradientStop Color="{StaticResource AccentDarkClickColor}" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80" />
             <ColumnDefinition Width="435" />
@@ -17,9 +24,9 @@
             <ColumnDefinition Width="140" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" x:Name="NavPanel" Background="{StaticResource AccentDark}" />
+        <Border Grid.Column="0" x:Name="NavPanel" Background="Transparent" />
 
-        <Border Grid.Column="1" x:Name="TaskList" Background="{StaticResource TaskListBackground}">
+        <Border Grid.Column="1" x:Name="TaskList" Background="{StaticResource TaskListBackground}" >
             <Grid Margin="7 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
@@ -47,15 +54,15 @@
             </Grid>
         </Border>
 
-        <Border Grid.Column="2" Background="{StaticResource AccentDark}" />
-        <views:TaskDetailsUserControl Grid.Column="2" />
-        <Border Grid.Column="3" x:Name="TaskStatus" Background="{StaticResource AccentDark}">
+        <Border Grid.Column="2" Background="Transparent" />
+        <views:TaskDetailsUserControl Grid.Column="2"/>
+        <Border Grid.Column="3" x:Name="TaskStatus" Background="Transparent">
             <StackPanel HorizontalAlignment="Center" Margin="0 20">
                 <TextBlock
                         Text="{Binding TaskElapsedTime, FallbackValue=0, TargetNullValue=0}"
                         Foreground="White" />
                 <TextBlock
-                        Text="{Binding CurrentTime, FallbackValue=0, TargetNullValue=0, Converter={StaticResource DateTimeCultureConverter}}"
+                        Text="{Binding CurrentTime, FallbackValue=0, TargetNullValue=0, Converter={StaticResource DatetimeCultureConverter}}"
                         Foreground="White" />
             </StackPanel>
         </Border>

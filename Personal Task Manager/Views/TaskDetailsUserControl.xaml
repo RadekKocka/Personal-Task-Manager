@@ -33,7 +33,8 @@
 
                 <Button Content="Complete Task" 
                         Command="{Binding CompleteTaskCommand}"
-                        CommandParameter="{Binding SelectedTask}" />
+                        CommandParameter="{Binding SelectedTask}"
+                        Visibility="{Binding SelectedTask, Converter={StaticResource NullToVisibilityConverter}}"/>
             </Grid>
         </Grid>
     </Border>

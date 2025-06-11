@@ -2,16 +2,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Color definitions -->
-    <Color x:Key="AccentDarkColor">#FF124037</Color>
+    <Color x:Key="AccentDarkColor">#FF245473</Color>
     <Color x:Key="AccentDarkOverColor">#FF396A84</Color>
     <Color x:Key="AccentDarkClickColor">#FF66A3C5</Color>
-    <Color x:Key="TaskListBackgroundColor">#FFA6A08F</Color>
+    <Color x:Key="TaskListBackgroundColor">#FFE0CCB8</Color>
     <Color x:Key="WindowBackgroundColor">#FFFFFFFF</Color>
     <Color x:Key="TaskStatusBackgroundColor">#FFF6F6F6</Color>
     <Color x:Key="DefaultTextColor">#FF474747</Color>
     <Color x:Key="OnAccentColor">#FFFFFFFF</Color>
     <Color x:Key="OnItemHoverColor">#FFF2C166</Color>
-    <Color x:Key="BackgroundTaskDetailsColor">#FFA67437</Color>
+    <Color x:Key="BackgroundTaskDetailsColor">#edbc61</Color>
 
     <!-- Task importance colors -->
     <Color x:Key="LowImportanceColor">#FF0CAFF4</Color>

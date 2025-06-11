@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Personal_Task_Manager.Dictionaries.Converters">
+    <converters:DateTimeCultureConverter x:Key="DatetimeCultureConverter" />
+    <converters:ImportanceBackgroundConverter x:Key="ImportanceBackgroundConverter" />
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <converters:CategoryBackgroundConverter x:Key="CategoryBackgroundConverter" />
+    <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+    <converters:WatermarkPaddingConverter x:Key="WatermarkPaddingConverter" />
+</ResourceDictionary>
