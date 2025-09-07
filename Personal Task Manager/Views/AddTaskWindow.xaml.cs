@@ -20,13 +20,13 @@ namespace Personal_Task_Manager.Views
             ViewModel.TaskEntryFinished += OnTaskSaved;
         }
 
-        public static AddTaskWindow CreateWindow(ObservableCollection<TaskItem> taskItems, TaskItem taskItem, Window owner)
+        public static AddTaskWindow EditTask(ObservableCollection<TaskItem> taskItems, TaskItem taskItem, Window owner)
         {
             var vm = new AddTaskViewModel(taskItems, taskItem);
             return new AddTaskWindow(owner, vm);
         }
 
-        public static AddTaskWindow CreateWindow(ObservableCollection<TaskItem> taskItems, Window owner)
+        public static AddTaskWindow CreateTask(ObservableCollection<TaskItem> taskItems, Window owner)
         {
             var vm = new AddTaskViewModel(taskItems);
             return new AddTaskWindow(owner, vm);

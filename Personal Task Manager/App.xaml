@@ -1,4 +1,4 @@
-﻿<Application x:Class="Personal_Task_Manager.App"
+<Application x:Class="Personal_Task_Manager.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Personal_Task_Manager"
@@ -18,7 +18,8 @@
                 <ResourceDictionary Source="Dictionaries/Styles/BorderStyles.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles/Checkbox.Styles.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles/Combobox.Styles.xaml"/>
-                <ResourceDictionary Source="Dictionaries/Styles/ScrollViewer.Style.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/ScrollviewerStyle.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Styles/ScrollBarCollors.xaml"/>
 
                 <ResourceDictionary Source="Dictionaries/DataTemplates/TaskItemDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>

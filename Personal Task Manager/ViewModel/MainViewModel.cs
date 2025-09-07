@@ -1,6 +1,7 @@
 ﻿using Personal_Task_Manager.DataServices;
 using Personal_Task_Manager.DummyData;
 using Personal_Task_Manager.Models;
+using Personal_Task_Manager.Models.Enums;
 using Personal_Task_Manager.Services;
 using Personal_Task_Manager.ViewModel.Commands;
 using Personal_Task_Manager.Views;
@@ -20,6 +21,8 @@ namespace Personal_Task_Manager.ViewModel
         private ICollectionView tasksView;
         private TaskItem selectedTask;
         private TaskTimerService timer;
+        private bool showCompletedTasks = false;
+        private TaskState taskStateFlags;
         #endregion
 
         #region Constructor
@@ -28,8 +31,8 @@ namespace Personal_Task_Manager.ViewModel
             ArgumentNullException.ThrowIfNull(dataProvider);
             Tasks = new ObservableCollection<TaskItem>(dataProvider.LoadData());
             //Tasks = DummySeeder.GetDummyTasks();
-            TasksView = CollectionViewSource.GetDefaultView(Tasks);
-            TasksView.Filter = FilterTasks;
+            UpdateTaskFlags();
+            TasksView = GetTasksInProgressView(Tasks);
             timer = new TaskTimerService(UpdateTimes);
         }
         #endregion
@@ -75,6 +78,17 @@ namespace Personal_Task_Manager.ViewModel
         public DateTime CurrentTime => DateTime.Now;
 
         public string TaskElapsedTime => (SelectedTask?.GetTaskElapsedTime() ?? TimeSpan.Zero).ToString(@"hh\:mm\:ss");
+
+        public bool ShowCompletedTasks
+        {
+            get => showCompletedTasks;
+            set
+            {
+                SetProperty(ref showCompletedTasks, value);
+                UpdateTaskFlags();
+                TasksView.Refresh();
+            }
+        }
         #endregion
 
         #region Commands
@@ -102,13 +116,17 @@ namespace Personal_Task_Manager.ViewModel
 
         private bool FilterTasks(object obj)
         {
+            bool searchFilter = true;
             if (obj is TaskItem task)
             {
-                return string.IsNullOrWhiteSpace(SearchText) ||
+                bool taskState = (taskStateFlags & task.State) == task.State;
+
+                searchFilter = (string.IsNullOrWhiteSpace(SearchText) ||
                        task.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                       (task.Description?.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ?? false);
+                       (task.Description?.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ?? false));
+                return searchFilter && taskState;
             }
-            return false;
+            return true;
         }
 
         private void UpdateTimes()
@@ -130,6 +148,7 @@ namespace Personal_Task_Manager.ViewModel
                 taskItem.CompleteSubTasks();
                 taskItem.CompleteTask();
             }
+            tasksView.Refresh();
         }
 
         private bool CanCompleteTask(TaskItem taskItem)
@@ -139,15 +158,29 @@ namespace Personal_Task_Manager.ViewModel
 
         private void AddNewTask(object? obj)
         {
-            var addTaskWindow = AddTaskWindow.CreateWindow(Tasks, App.Current.MainWindow);
+            var addTaskWindow = AddTaskWindow.CreateTask(Tasks, App.Current.MainWindow);
             addTaskWindow.ShowDialog();
         }
 
         private void EditTask(TaskItem item)
         {
-            var editTaskWindow = AddTaskWindow.CreateWindow(Tasks, item, App.Current.MainWindow);
+            var editTaskWindow = AddTaskWindow.EditTask(Tasks, item, App.Current.MainWindow);
             editTaskWindow.ShowDialog();
             tasksView.Refresh();
+        }
+
+        private ICollectionView GetTasksInProgressView(ObservableCollection<TaskItem> taskItems)
+        {
+            tasksView = CollectionViewSource.GetDefaultView(taskItems);
+            tasksView.Filter = FilterTasks;
+            tasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.IsComplete), ListSortDirection.Ascending));
+            return tasksView;
+        }
+
+        private void UpdateTaskFlags()
+        {
+            taskStateFlags = TaskState.All;
+            taskStateFlags = ShowCompletedTasks ? taskStateFlags &= TaskState.Complete : taskStateFlags &= ~TaskState.Complete;
         }
 
         #endregion
