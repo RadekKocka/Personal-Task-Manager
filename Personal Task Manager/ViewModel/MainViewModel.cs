@@ -33,7 +33,6 @@ namespace Personal_Task_Manager.ViewModel
             //Tasks = DummySeeder.GetDummyTasks();
             UpdateTaskFlags();
             TasksView = GetTasksInProgressView(Tasks);
-            timer = new TaskTimerService(UpdateTimes);
         }
         #endregion
 
@@ -129,15 +128,6 @@ namespace Personal_Task_Manager.ViewModel
             return true;
         }
 
-        private void UpdateTimes()
-        {
-            OnPropertyChanged(nameof(CurrentTime));
-            if (SelectedTask != null)
-            {
-                OnPropertyChanged(nameof(TaskElapsedTime));
-            }
-        }
-
         private void CompleteTask(TaskItem taskItem)
         {
             ArgumentNullException.ThrowIfNull(taskItem);
@@ -173,14 +163,15 @@ namespace Personal_Task_Manager.ViewModel
         {
             tasksView = CollectionViewSource.GetDefaultView(taskItems);
             tasksView.Filter = FilterTasks;
-            tasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.IsComplete), ListSortDirection.Ascending));
+            tasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.DueDate), ListSortDirection.Ascending));
             return tasksView;
         }
 
         private void UpdateTaskFlags()
         {
             taskStateFlags = TaskState.All;
-            taskStateFlags = ShowCompletedTasks ? taskStateFlags &= TaskState.Complete : taskStateFlags &= ~TaskState.Complete;
+            if (!ShowCompletedTasks)
+                taskStateFlags &= ~TaskState.Complete;
         }
 
         #endregion

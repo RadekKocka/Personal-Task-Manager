@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
+﻿using System.Timers;
+using System.Windows;
+using Timer = System.Timers.Timer;
 
 namespace Personal_Task_Manager.Services
 {
     public class TaskTimerService : IDisposable
     {
-        private DispatcherTimer _timer;
+        private readonly Timer _timer;
+        private readonly Action _action;
 
-        public TaskTimerService(int ticks, Action action)
+        public TaskTimerService(int intervalMs, Action action)
         {
-            _timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromMilliseconds(ticks)
-            };
-            _timer.Tick += (s, e) =>
-            {
-                action.Invoke();
-            };
+            _action = action ?? throw new ArgumentNullException(nameof(action));
+            _timer = new Timer(intervalMs) { AutoReset = true };
+            _timer.Elapsed += Timer_Elapsed;
+
             _timer.Start();
         }
 
@@ -28,11 +22,20 @@ namespace Personal_Task_Manager.Services
         {
         }
 
+        private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
+        {
+            var dispatcher = Application.Current?.Dispatcher;
+            if (dispatcher is not null)
+                dispatcher.BeginInvoke(_action);
+            else
+                _action();
+        }
+
         public void Dispose()
         {
             _timer.Stop();
-            _timer.Tick -= (s, e) => { };
-            _timer = null!;
+            _timer.Elapsed -= Timer_Elapsed;
+            _timer.Dispose();
         }
     }
 }

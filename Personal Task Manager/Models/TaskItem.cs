@@ -79,6 +79,9 @@ namespace Personal_Task_Manager.Models
             set => SetProperty(ref subTasks, value);
         }
 
+        public String ElapsedTimeFormatted => FormatTimeSpan(GetTaskElapsedTime());
+        public String RemainingTimeFormatted => FormatTimeSpan(GetRemainingTime());
+
         public void CompleteTask()
         {
             State = TaskState.Complete;
@@ -106,6 +109,35 @@ namespace Personal_Task_Manager.Models
 
                 return DateTime.Now - StartDate;
             }
+        }
+
+        public TimeSpan GetRemainingTime()
+        {
+            if (DueDate.HasValue)
+            {
+                if (DueDate.Value < DateTime.Now)
+                    return TimeSpan.Zero;
+                return DueDate.Value - DateTime.Now;
+            }
+            return TimeSpan.Zero;
+        }
+
+        private static string FormatTimeSpan(TimeSpan ts)
+        {
+            ts = ts.Duration();
+
+            int days = ts.Days;            
+            int hours = ts.Hours;          
+            int minutes = ts.Minutes;
+            int seconds = ts.Seconds;
+
+            if (days > 0)
+            {
+                return $"{days}d {hours:D2}:{minutes:D2}:{seconds:D2}";
+            }
+
+            int totalHours = (int)ts.TotalHours;
+            return $"{totalHours:D2}:{minutes:D2}:{seconds:D2}";
         }
 
         public void OnCompleted()
