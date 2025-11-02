@@ -34,18 +34,33 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Style="{StaticResource Heading1}" Content="Tasks" VerticalAlignment="Center"
-                            IsHitTestVisible="False" />
-                    <Button Style="{StaticResource AddTaskButtonStyle}" Command="{Binding AddTaskCommand}" Height="30"
-                            Width="30" HorizontalAlignment="Right" ToolTip="Add new task"
-                            Content="{icons:MaterialIconExt Kind=PlaylistAdd,Size=25}" />
-                    <ToggleButton Content="{icons:MaterialIconTextExt Kind=Tick, Size=25}" 
-                                  IsChecked="{Binding ShowCompletedTasks}" 
-                                  Height="30"
-                                  Margin="5 0"
-                                  ToolTip="Show complete tasks"/>
-                </StackPanel>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+                        <Label Style="{StaticResource Heading1}" Content="Tasks" VerticalAlignment="Center"
+                                IsHitTestVisible="False" />
+                        <Button Style="{StaticResource AddTaskButtonStyle}" Command="{Binding AddTaskCommand}"
+                                Height="30" Width="30" HorizontalAlignment="Right" ToolTip="Add new task"
+                                Content="{icons:MaterialIconExt Kind=PlaylistAdd,Size=25}" />
+                        <ToggleButton Content="{icons:MaterialIconTextExt Kind=Tick, Size=25}"
+                                IsChecked="{Binding ShowCompletedTasks}" Height="30" Margin="5 0"
+                                ToolTip="Show complete tasks" />
+
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label Content="Sort by:" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                Target="{Binding ElementName=SortCombobox}"/>
+                        <ComboBox x:Name="SortCombobox" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                  Width="200" Height="30" 
+                                  SelectedValuePath="Key" DisplayMemberPath="Value"
+                                  Style="{StaticResource ComboboxStyle}"
+                                  SelectedValue="{Binding SelectedSortingItem}"
+                                  ItemsSource="{Binding SortItems}"/>
+                    </StackPanel>
+                </Grid>
                 <controls:WatermarkTextBox Grid.Row="1"
                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         Watermark="Search..." MinHeight="25" Height="35" FontSize="16" Padding="5" VerticalAlignment="Center"/>

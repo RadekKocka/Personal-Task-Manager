@@ -15,12 +15,12 @@ namespace Personal_Task_Manager.Models
             {
                 if (SetProperty(ref isComplete, value))
                 {
-                    NotifySubsribers();
+                    NotifySubscribers();
                 }
             }
         }
 
-        private void NotifySubsribers()
+        private void NotifySubscribers()
         {
             if (_observer == null)
                 return;

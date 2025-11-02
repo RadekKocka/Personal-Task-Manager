@@ -2,6 +2,7 @@
 using Personal_Task_Manager.DummyData;
 using Personal_Task_Manager.Models;
 using Personal_Task_Manager.Models.Enums;
+using Personal_Task_Manager.Models.Helpers;
 using Personal_Task_Manager.Services;
 using Personal_Task_Manager.ViewModel.Commands;
 using Personal_Task_Manager.Views;
@@ -20,9 +21,9 @@ namespace Personal_Task_Manager.ViewModel
         private ObservableCollection<TaskItem> tasks;
         private ICollectionView tasksView;
         private TaskItem selectedTask;
-        private TaskTimerService timer;
         private bool showCompletedTasks = false;
         private TaskState taskStateFlags;
+        private SortingEnum _selectedSortingItem;
         #endregion
 
         #region Constructor
@@ -88,6 +89,31 @@ namespace Personal_Task_Manager.ViewModel
                 TasksView.Refresh();
             }
         }
+
+        public List<KeyValuePair<SortingEnum, String>> SortItems => Enum.GetValues(typeof(SortingEnum)).Cast<SortingEnum>().Select(x => EnumDescriptionExtension.GetValueAndDescription(x)).ToList();
+
+        public SortingEnum SelectedSortingItem
+        {
+            get => _selectedSortingItem;
+            set
+            {
+                SetProperty(ref _selectedSortingItem, value);
+                TasksView.SortDescriptions.Clear();
+                switch (_selectedSortingItem)
+                {
+                    case SortingEnum.ByDueDateAscending:
+                        TasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.DueDate), ListSortDirection.Ascending));
+                        break;
+                    case SortingEnum.ByDueDateDescending:
+                        TasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.DueDate), ListSortDirection.Descending));
+                        break;
+                    default:
+                        break;
+                }
+                TasksView.Refresh();
+            }
+        }
+
         #endregion
 
         #region Commands
