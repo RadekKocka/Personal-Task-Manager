@@ -9,9 +9,13 @@ namespace Personal_Task_Manager.Models.Enums
 {
     public enum SortingEnum
     {
-        [Description("Due date ascending")]
+        [Description("Due date — earliest first")]
         ByDueDateAscending,
-        [Description("Due date descending")]
+        [Description("Due date — latest first")]
         ByDueDateDescending,
+        [Description("Importance — low to high")]
+        ByImportanceAscending,
+        [Description("Importance — high to low")]
+        ByImportanceDescending,
     }
 }

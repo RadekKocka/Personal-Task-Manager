@@ -99,17 +99,7 @@ namespace Personal_Task_Manager.ViewModel
             {
                 SetProperty(ref _selectedSortingItem, value);
                 TasksView.SortDescriptions.Clear();
-                switch (_selectedSortingItem)
-                {
-                    case SortingEnum.ByDueDateAscending:
-                        TasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.DueDate), ListSortDirection.Ascending));
-                        break;
-                    case SortingEnum.ByDueDateDescending:
-                        TasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.DueDate), ListSortDirection.Descending));
-                        break;
-                    default:
-                        break;
-                }
+                SetSort(_selectedSortingItem);
                 TasksView.Refresh();
             }
         }
@@ -198,6 +188,31 @@ namespace Personal_Task_Manager.ViewModel
             taskStateFlags = TaskState.All;
             if (!ShowCompletedTasks)
                 taskStateFlags &= ~TaskState.Complete;
+        }
+
+        private void SetSort(SortingEnum sortingEnum)
+        {
+            if (TasksView is not ListCollectionView listCollectionView)
+                return;
+
+            switch (sortingEnum)
+            {
+                case SortingEnum.ByDueDateAscending:
+                    listCollectionView.CustomSort = new DueDateComparer(isAscending: true);
+                    break;
+                case SortingEnum.ByDueDateDescending:
+                    listCollectionView.CustomSort = new DueDateComparer(isAscending: false);
+                    break;
+                case SortingEnum.ByImportanceAscending:
+                    listCollectionView.CustomSort = new ImportanceComparer(isAscending: true);
+                    break;
+                case SortingEnum.ByImportanceDescending:
+                    listCollectionView.CustomSort = new ImportanceComparer(isAscending: false);
+                    break;
+                default:
+                    TasksView.SortDescriptions.Add(new SortDescription(nameof(TaskItem.DueDate), ListSortDirection.Ascending));
+                    break;
+            }
         }
 
         #endregion
