@@ -36,7 +36,7 @@ namespace Personal_Task_Manager.Views
         private static void OnTaskChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = (TimeControl)d;
-            if (e.NewValue is TaskItem task)
+            if (e.NewValue is TaskItemViewModel task)
                 control.DataContext = new TimeControlViewModel(task);
             else
                 control.DataContext = null;

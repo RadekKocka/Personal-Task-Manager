@@ -43,10 +43,16 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="22" FontWeight="Bold"
                         FontFamily="Sans Serif" HorizontalAlignment="Left" VerticalAlignment="Center"
                         TextDecorations="Underline" />
+                <Button HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"
+                        Command="{Binding AddSubTaskCommand}" 
+                        Content="{icons:MaterialIconExt Kind=Plus}"
+                        Style="{StaticResource AddTaskButtonStyle}"
+                        Height="25" Width="25"/>
                 <Border CornerRadius="7" Grid.Column="1" HorizontalAlignment="Right"
                         Background="{Binding Importance, Converter={StaticResource ImportanceBackgroundConverter}}"
                         Width="150">

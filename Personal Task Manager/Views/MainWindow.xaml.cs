@@ -48,7 +48,7 @@ namespace Personal_Task_Manager
             {
                 try
                 {
-                    _dataProvider.SaveData(_viewModel.Tasks.ToList());
+                    _dataProvider.SaveData(_viewModel.Tasks.Select(x => x.Model).ToList());
                 }
                 catch (Exception ex)
                 {

@@ -10,7 +10,7 @@ namespace Personal_Task_Manager.ViewModel
     public class AddTaskViewModel
     {
         #region Fields
-        private TaskItem _taskItem;
+        private TaskItemViewModel _taskItem;
         #endregion
 
         #region Properties
@@ -23,9 +23,9 @@ namespace Personal_Task_Manager.ViewModel
         public TaskCategory? SelectedCategory { get; set; }
         public DateTime? DueDate { get; set; }
 
-        private List<TaskCheckList> SubTasks = new List<TaskCheckList>();
+        private ObservableCollection<TaskCheckList> SubTasks = [];
 
-        private ObservableCollection<TaskItem> _taskItems;
+        private ObservableCollection<TaskItemViewModel> _taskItems;
 
         public event EventHandler<bool> TaskEntryFinished;
         #endregion
@@ -36,7 +36,7 @@ namespace Personal_Task_Manager.ViewModel
         #endregion
 
         #region Constructor
-        public AddTaskViewModel(ObservableCollection<TaskItem> taskItems)
+        public AddTaskViewModel(ObservableCollection<TaskItemViewModel> taskItems)
         {
             Categories = Enum.GetValues<TaskCategory>().ToList();
             Importances = Enum.GetValues<TaskImportance>().ToList();
@@ -50,7 +50,7 @@ namespace Personal_Task_Manager.ViewModel
             _taskItems = taskItems;
         }
 
-        public AddTaskViewModel(ObservableCollection<TaskItem> taskItems, TaskItem taskItem)
+        public AddTaskViewModel(ObservableCollection<TaskItemViewModel> taskItems, TaskItemViewModel taskItem)
             : this(taskItems)
         {
             _taskItem = taskItem;
@@ -59,7 +59,7 @@ namespace Personal_Task_Manager.ViewModel
             DueDate = taskItem.DueDate;
             SelectedCategory = taskItem.Category;
             SelectedImportance = taskItem.Importance;
-            SubTasks = taskItem.SubTasks.ToList();
+            SubTasks = taskItem.SubTasks;
         }
         #endregion
 
@@ -92,7 +92,7 @@ namespace Personal_Task_Manager.ViewModel
                 .WithSubTasks(SubTasks)
                 .Build();
 
-                _taskItems.Add(task);
+                _taskItems.Add(new TaskItemViewModel(task));
             }
 
             OnTaskEntryFinished(false);

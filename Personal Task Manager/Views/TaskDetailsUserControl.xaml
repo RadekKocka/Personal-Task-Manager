@@ -19,11 +19,13 @@
                 <RowDefinition Height="*" MaxHeight="50" />
             </Grid.RowDefinitions>
             <ContentControl Grid.Row="0" Content="{Binding SelectedTask}"
-                    ContentTemplate="{StaticResource TaskItemDetailsDataTemplate}" HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" />
+                            ContentTemplate="{StaticResource TaskItemDetailsDataTemplate}" 
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
             <ListBox Grid.Row="1" Margin="15 0" Style="{StaticResource SubTasksListStyle}"
-                    ItemContainerStyle="{StaticResource SubListTaskItem}"
-                    ItemTemplate="{StaticResource SubListTaskDataTemplate}" ItemsSource="{Binding SelectedTask.SubTasks}" />
+                     ItemContainerStyle="{StaticResource SubListTaskItem}"
+                     ItemTemplate="{StaticResource SubListTaskDataTemplate}" 
+                     ItemsSource="{Binding SelectedTask.SubTasks}" />
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

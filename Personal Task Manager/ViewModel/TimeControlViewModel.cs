@@ -11,11 +11,11 @@ namespace Personal_Task_Manager.ViewModel
     public class TimeControlViewModel : BaseViewModel
     {
         private readonly TaskTimerService _taskTimerService;
-        TaskItem _task;
-        public TimeControlViewModel(TaskItem task)
+        TaskItemViewModel _task;
+        public TimeControlViewModel(TaskItemViewModel taskViewModel)
         {
             _taskTimerService = new TaskTimerService(UpdateTimes);
-            _task = task;
+            _task = taskViewModel;
         }
 
         public String ElapsedTime => _task.ElapsedTimeFormatted;
