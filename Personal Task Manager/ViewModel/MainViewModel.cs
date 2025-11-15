@@ -132,7 +132,7 @@ namespace Personal_Task_Manager.ViewModel
         private bool FilterTasks(object obj)
         {
             bool searchFilter = true;
-            if (obj is TaskItem task)
+            if (obj is TaskItemViewModel task)
             {
                 bool taskState = (taskStateFlags & task.State) == task.State;
 
