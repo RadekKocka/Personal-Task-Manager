@@ -8,7 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
-    <Border Grid.Column="2" Style="{StaticResource SelectedTaskAnimatedBorderStyle}">
+    <Border Grid.Column="2" Style="{StaticResource SelectedTaskAnimatedBorderStyle}"
+            Visibility="{Binding SelectedTask, Converter={StaticResource NullToVisibilityConverter}}">
         <Border.RenderTransform>
             <ScaleTransform ScaleY="1" />
         </Border.RenderTransform>
@@ -35,8 +36,7 @@
 
                 <Button Content="Complete Task" 
                         Command="{Binding CompleteTaskCommand}"
-                        CommandParameter="{Binding SelectedTask}"
-                        Visibility="{Binding SelectedTask, Converter={StaticResource NullToVisibilityConverter}}"/>
+                        CommandParameter="{Binding SelectedTask}"/>
             </Grid>
         </Grid>
     </Border>
