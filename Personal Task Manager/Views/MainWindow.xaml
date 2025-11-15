@@ -54,7 +54,7 @@
                         <Label Content="Sort by:" VerticalAlignment="Center" HorizontalAlignment="Right"
                                 Target="{Binding ElementName=SortCombobox}"/>
                         <ComboBox x:Name="SortCombobox" HorizontalAlignment="Right" VerticalAlignment="Center"
-                                  Width="200" Height="30" 
+                                  Width="100" Height="30" 
                                   SelectedValuePath="Key" DisplayMemberPath="Value"
                                   Style="{StaticResource ComboboxStyle}"
                                   SelectedValue="{Binding SelectedSortingItem}"
