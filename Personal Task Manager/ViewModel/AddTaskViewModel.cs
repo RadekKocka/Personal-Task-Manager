@@ -28,6 +28,7 @@ namespace Personal_Task_Manager.ViewModel
         private ObservableCollection<TaskItemViewModel> _taskItems;
 
         public event EventHandler<bool> TaskEntryFinished;
+        public TaskItemViewModel CurrentTask => _taskItem;
         #endregion
 
         #region Commands
@@ -91,7 +92,9 @@ namespace Personal_Task_Manager.ViewModel
                 .WithSubTasks(SubTasks)
                 .Build();
 
-                _taskItems.Add(new TaskItemViewModel(task));
+                TaskItemViewModel taskItemViewModel = new(task);
+                _taskItems.Add(taskItemViewModel);
+                _taskItem = taskItemViewModel;
             }
 
             OnTaskEntryFinished(false);

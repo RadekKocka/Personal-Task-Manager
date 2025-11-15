@@ -66,9 +66,6 @@ namespace Personal_Task_Manager.ViewModel
             get => selectedTask;
             set
             {
-                // set null so storyboard can happen
-                selectedTask = null;
-                OnPropertyChanged(nameof(SelectedTask));
                 selectedTask = value;
                 OnPropertyChanged(nameof(SelectedTask));
                 OnPropertyChanged(nameof(TaskElapsedTime));
@@ -166,6 +163,7 @@ namespace Personal_Task_Manager.ViewModel
         {
             var addTaskWindow = AddTaskWindow.CreateTask(Tasks, App.Current.MainWindow);
             addTaskWindow.ShowDialog();
+            SelectedTask = addTaskWindow.ViewModel.CurrentTask;
         }
 
         private void EditTask(TaskItemViewModel item)
