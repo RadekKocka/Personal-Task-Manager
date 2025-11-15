@@ -16,14 +16,13 @@ namespace Personal_Task_Manager.ViewModel
         public TaskItemViewModel(TaskItem taskItem)
         {
             _model = taskItem ?? throw new ArgumentNullException(nameof(taskItem));
-            SubTasks = new ObservableCollection<TaskCheckList>(_model.SubTasks);
+            OnPropertyChanged(nameof(SubTasks));
             AddSubTaskCommand = new RelayCommand(_ => AddSubTask());
         }
         #endregion
 
         #region Properties
         public TaskItem Model => _model;
-        public ObservableCollection<TaskCheckList> SubTasks { get; set; }
 
         public string Title
         {
@@ -118,6 +117,8 @@ namespace Personal_Task_Manager.ViewModel
             }
         }
 
+        public ObservableCollection<TaskCheckList> SubTasks => new(_model.SubTasks);
+
         public string ElapsedTimeFormatted => FormatTimeSpan(GetTaskElapsedTime());
         public string RemainingTimeFormatted => FormatTimeSpan(GetRemainingTime());
 
@@ -188,13 +189,14 @@ namespace Personal_Task_Manager.ViewModel
 
         private void AddSubTask()
         {
-            var newSubTask = new TaskCheckList
+            //TODO : Implement a dialog to get subtask details from the user
+            var dummySubTask = new TaskCheckList
             {
                 Description = "New Subtask",
                 IsComplete = false
             };
-            SubTasks.Add(newSubTask);
-            // UI bound to SubTasks will update automatically
+            _model.SubTasks.Add(dummySubTask);
+            OnPropertyChanged(nameof(SubTasks));
         }
         #endregion
 

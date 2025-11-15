@@ -50,6 +50,8 @@ namespace Personal_Task_Manager.Services
             _taskItem.Importance = importance;
             return this;
         }
+
+        //TODO: Subject to change. At the moment tasks can be added only one by one from UI.
         public TaskItemBuilder WithSubTasks(ObservableCollection<TaskCheckList> subTasks)
         {
             _taskItem.SubTasks = subTasks.ToList();

@@ -78,7 +78,6 @@ namespace Personal_Task_Manager.ViewModel
                 _taskItem.State = TaskState.InProgress;
                 _taskItem.Category = SelectedCategory!.Value;
                 _taskItem.Importance = SelectedImportance!.Value;
-                _taskItem.SubTasks = SubTasks;
             }
             else
             {
