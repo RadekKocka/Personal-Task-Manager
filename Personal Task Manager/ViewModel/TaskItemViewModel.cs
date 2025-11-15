@@ -1,12 +1,7 @@
-﻿using Microsoft.VisualBasic;
-using Personal_Task_Manager.Models;
+﻿using Personal_Task_Manager.Models;
 using Personal_Task_Manager.Models.Enums;
 using Personal_Task_Manager.ViewModel.Commands;
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Personal_Task_Manager.ViewModel
