@@ -14,13 +14,13 @@ namespace Personal_Task_Manager.Views
         public static readonly DependencyProperty TaskProperty =
             DependencyProperty.Register(
                 nameof(Task),
-                typeof(TaskItem),
+                typeof(TaskItemViewModel),
                 typeof(TimeControl),
                 new PropertyMetadata(null, OnTaskChanged));
 
-        public TaskItem Task
+        public TaskItemViewModel Task
         {
-            get => (TaskItem)GetValue(TaskProperty);
+            get => (TaskItemViewModel)GetValue(TaskProperty);
             set => SetValue(TaskProperty, value);
         }
         public TimeControl()
@@ -28,7 +28,7 @@ namespace Personal_Task_Manager.Views
             InitializeComponent();
         }
 
-        public TimeControl(TaskItem task) : this()
+        public TimeControl(TaskItemViewModel task) : this()
         {
             Task = task;
         }
@@ -36,7 +36,7 @@ namespace Personal_Task_Manager.Views
         private static void OnTaskChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = (TimeControl)d;
-            if (e.NewValue is TaskItem task)
+            if (e.NewValue is TaskItemViewModel task)
                 control.DataContext = new TimeControlViewModel(task);
             else
                 control.DataContext = null;

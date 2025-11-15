@@ -2,6 +2,7 @@
 using Personal_Task_Manager.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,13 +50,11 @@ namespace Personal_Task_Manager.Services
             _taskItem.Importance = importance;
             return this;
         }
-        public TaskItemBuilder WithSubTasks(List<TaskCheckList> subTasks)
+
+        //TODO: Subject to change. At the moment tasks can be added only one by one from UI.
+        public TaskItemBuilder WithSubTasks(ObservableCollection<TaskCheckList> subTasks)
         {
-            _taskItem.SubTasks = subTasks;
-            foreach (var subTask in _taskItem.SubTasks)
-            {
-                subTask.Subscribe(_taskItem);
-            }
+            _taskItem.SubTasks = subTasks.ToList();
             return this;
         }
 

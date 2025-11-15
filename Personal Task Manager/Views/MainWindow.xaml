@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:Personal_Task_Manager.Controls"
         xmlns:icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
         xmlns:views="clr-namespace:Personal_Task_Manager.Views"
-        d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}" mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}" mc:Ignorable="d"
         Title="MainWindow" Height="832" Width="1280" MinWidth="805" MinHeight="600" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>

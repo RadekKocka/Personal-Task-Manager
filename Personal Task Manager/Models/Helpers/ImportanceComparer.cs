@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Personal_Task_Manager.ViewModel;
+using System.Collections;
 
 namespace Personal_Task_Manager.Models.Helpers
 {
@@ -11,8 +12,8 @@ namespace Personal_Task_Manager.Models.Helpers
         }
         public int Compare(object? x, object? y)
         {
-            var taskImportanceX = x as TaskItem;
-            var taskImportanceY = y as TaskItem;
+            var taskImportanceX = x as TaskItemViewModel;
+            var taskImportanceY = y as TaskItemViewModel;
             if (taskImportanceX == null || taskImportanceY == null)
                 return 0;
 

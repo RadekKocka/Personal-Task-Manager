@@ -18,9 +18,9 @@ namespace Personal_Task_Manager.ViewModel
     {
         #region Fields
         private string searchText;
-        private ObservableCollection<TaskItem> tasks;
+        private ObservableCollection<TaskItemViewModel> tasks;
         private ICollectionView tasksView;
-        private TaskItem selectedTask;
+        private TaskItemViewModel selectedTask;
         private bool showCompletedTasks = false;
         private TaskState taskStateFlags;
         private SortingEnum _selectedSortingItem;
@@ -30,7 +30,7 @@ namespace Personal_Task_Manager.ViewModel
         public MainViewModel(IDataProvider dataProvider)
         {
             ArgumentNullException.ThrowIfNull(dataProvider);
-            Tasks = new ObservableCollection<TaskItem>(dataProvider.LoadData());
+            Tasks = new ObservableCollection<TaskItemViewModel>(dataProvider.LoadData().Select(x => new TaskItemViewModel(x)));
             //Tasks = DummySeeder.GetDummyTasks();
             UpdateTaskFlags();
             TasksView = GetTasksInProgressView(Tasks);
@@ -55,13 +55,13 @@ namespace Personal_Task_Manager.ViewModel
             set => SetProperty(ref tasksView, value);
         }
 
-        public ObservableCollection<TaskItem> Tasks
+        public ObservableCollection<TaskItemViewModel> Tasks
         {
             get => tasks;
             set => SetProperty(ref tasks, value);
         }
 
-        public TaskItem SelectedTask
+        public TaskItemViewModel SelectedTask
         {
             get => selectedTask;
             set
@@ -107,17 +107,17 @@ namespace Personal_Task_Manager.ViewModel
         #endregion
 
         #region Commands
-        public ICommand DeleteTaskCommand => new RelayCommand<TaskItem>(DeleteTask);
+        public ICommand DeleteTaskCommand => new RelayCommand<TaskItemViewModel>(DeleteTask);
         public ICommand AddTaskCommand => new RelayCommand(AddNewTask);
 
-        public ICommand CompleteTaskCommand => new RelayCommand<TaskItem>(CompleteTask, CanCompleteTask);
+        public ICommand CompleteTaskCommand => new RelayCommand<TaskItemViewModel>(CompleteTask, CanCompleteTask);
 
-        public ICommand EditTaskCommand => new RelayCommand<TaskItem>(EditTask);
+        public ICommand EditTaskCommand => new RelayCommand<TaskItemViewModel>(EditTask);
 
         #endregion
 
         #region Methods
-        private void DeleteTask(TaskItem item)
+        private void DeleteTask(TaskItemViewModel item)
         {
             ArgumentNullException.ThrowIfNull(item);
 
@@ -132,7 +132,7 @@ namespace Personal_Task_Manager.ViewModel
         private bool FilterTasks(object obj)
         {
             bool searchFilter = true;
-            if (obj is TaskItem task)
+            if (obj is TaskItemViewModel task)
             {
                 bool taskState = (taskStateFlags & task.State) == task.State;
 
@@ -144,7 +144,7 @@ namespace Personal_Task_Manager.ViewModel
             return true;
         }
 
-        private void CompleteTask(TaskItem taskItem)
+        private void CompleteTask(TaskItemViewModel taskItem)
         {
             ArgumentNullException.ThrowIfNull(taskItem);
             var message = $"Complete task {taskItem.Title} and it's subsequent subtasks?";
@@ -157,7 +157,7 @@ namespace Personal_Task_Manager.ViewModel
             tasksView.Refresh();
         }
 
-        private bool CanCompleteTask(TaskItem taskItem)
+        private bool CanCompleteTask(TaskItemViewModel taskItem)
         {
             return taskItem != null && !taskItem.IsComplete;
         }
@@ -168,14 +168,14 @@ namespace Personal_Task_Manager.ViewModel
             addTaskWindow.ShowDialog();
         }
 
-        private void EditTask(TaskItem item)
+        private void EditTask(TaskItemViewModel item)
         {
             var editTaskWindow = AddTaskWindow.EditTask(Tasks, item, App.Current.MainWindow);
             editTaskWindow.ShowDialog();
             tasksView.Refresh();
         }
 
-        private ICollectionView GetTasksInProgressView(ObservableCollection<TaskItem> taskItems)
+        private ICollectionView GetTasksInProgressView(ObservableCollection<TaskItemViewModel> taskItems)
         {
             tasksView = CollectionViewSource.GetDefaultView(taskItems);
             tasksView.Filter = FilterTasks;

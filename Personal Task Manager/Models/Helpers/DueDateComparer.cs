@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Personal_Task_Manager.ViewModel;
+using System.Collections;
 
 namespace Personal_Task_Manager.Models.Helpers
 {
@@ -11,7 +12,7 @@ namespace Personal_Task_Manager.Models.Helpers
         }
         public int Compare(object? x, object? y)
         {
-            if (x is not TaskItem taskItem1 || y is not TaskItem taskItem2)
+            if (x is not TaskItemViewModel taskItem1 || y is not TaskItemViewModel taskItem2)
                 return 0;
             if (taskItem1.DueDate == null && taskItem2.DueDate == null)
                 return 0;
@@ -26,13 +27,6 @@ namespace Personal_Task_Manager.Models.Helpers
                 result = taskItem1.Importance < taskItem2.Importance ? 1 : -1;
 
             return _isAscending ? result : -result;
-        }
-
-        private int CompareAscending(TaskItem taskItem1, TaskItem taskItem2)
-        {
-            if (taskItem1.DueDate == taskItem2.DueDate)
-                return taskItem1.Importance < taskItem2.Importance ? 1 : -1;
-            return taskItem1.DueDate > taskItem2.DueDate ? 1 : -1;
         }
     }
 }
