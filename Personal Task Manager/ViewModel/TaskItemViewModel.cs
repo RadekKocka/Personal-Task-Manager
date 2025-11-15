@@ -190,12 +190,11 @@ namespace Personal_Task_Manager.ViewModel
         private void AddSubTask()
         {
             //TODO : Implement a dialog to get subtask details from the user
-            var dummySubTask = new TaskCheckList
+            var addTaskWindow = new Views.AddSubTaskWindow(this);
+            if (addTaskWindow.ShowDialog() == true)
             {
-                Description = "New Subtask",
-                IsComplete = false
-            };
-            _model.SubTasks.Add(dummySubTask);
+                _model.SubTasks.Add(addTaskWindow.SubTask);
+            }
             OnPropertyChanged(nameof(SubTasks));
         }
         #endregion

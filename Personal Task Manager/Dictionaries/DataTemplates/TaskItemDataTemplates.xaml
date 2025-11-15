@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Personal_Task_Manager.Models"
-        xmlns:icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF">
+        xmlns:icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+        xmlns:vm="clr-namespace:Personal_Task_Manager.ViewModel">
 
     <DataTemplate x:Key="TaskItemDataTemplate" DataType="{x:Type local:TaskItem}">
         <Grid>
@@ -37,7 +38,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TaskItemDetailsDataTemplate" DataType="{x:Type local:TaskItem}">
+    <DataTemplate x:Key="TaskItemDetailsDataTemplate" DataType="{x:Type vm:TaskItemViewModel}">
         <StackPanel Margin="20">
             <Grid Margin="0 0 0 15">
                 <Grid.ColumnDefinitions>
@@ -48,11 +49,7 @@
                 <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="22" FontWeight="Bold"
                         FontFamily="Sans Serif" HorizontalAlignment="Left" VerticalAlignment="Center"
                         TextDecorations="Underline" />
-                <Button HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"
-                        Command="{Binding AddSubTaskCommand}" 
-                        Content="{icons:MaterialIconExt Kind=Plus}"
-                        Style="{StaticResource AddTaskButtonStyle}"
-                        Height="25" Width="25"/>
+                
                 <Border CornerRadius="7" Grid.Column="1" HorizontalAlignment="Right"
                         Background="{Binding Importance, Converter={StaticResource ImportanceBackgroundConverter}}"
                         Width="150">
@@ -60,6 +57,7 @@
                             VerticalAlignment="Center" Background="Transparent" />
                 </Border>
             </Grid>
+            
             <ScrollViewer VerticalScrollBarVisibility="Hidden" Height="80">
                 <TextBlock Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap" DockPanel.Dock="Bottom"
                         TextAlignment="Justify" />
