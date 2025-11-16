@@ -28,31 +28,38 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <controls:WatermarkTextBox x:Name="TaskDescription" Grid.Row="0" Height="40" VerticalAlignment="Center"
-                    Width="300" FontSize="16" Margin="5" Watermark="Task description"
+            <Label Target="{Binding ElementName=TaskDescription}" 
+                   Foreground="WhiteSmoke" 
+                   Content="Enter Sub task description"
+                   Margin="5 0"/>
+            <controls:WatermarkTextBox x:Name="TaskDescription" 
+                                       Grid.Row="1" 
+                                       Height="35" 
+                                       Width="300"
+                                       VerticalAlignment="Center"
+                                       FontSize="12" 
+                                       Margin="5" 
+                                       Watermark="Task description"
                     Text="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" />
-            <DockPanel Grid.Row="1" Height="50" HorizontalAlignment="Center">
-                <Button Style="{StaticResource AddTaskButtonStyle}" VerticalContentAlignment="Center" Height="25"
-                        Width="100" Command="{Binding SaveSubTaskCommand}">
-                    <!-- Create a custom control for this (Material icons do not have vertically centered text) -->
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <icons:MaterialIconTextExt Kind="ContentSaveAdd" />
-                            <TextBlock Text="Save" VerticalAlignment="Center" FontSize="14" Margin="5 0" />
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
-                <Button Style="{StaticResource AddTaskButtonStyle}" Height="25" Width="100" Margin="15 0"
-                        Command="{Binding CancelCommand}">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <icons:MaterialIconTextExt Kind="Cancel" />
-                            <TextBlock Text="Cancel" VerticalAlignment="Center" FontSize="14" Margin="5 0" />
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
-            </DockPanel>
+            <UniformGrid Rows="1" Columns="2" 
+                         Grid.Row="2">
+                <Button Style="{StaticResource AddTaskButtonStyle}" 
+                        Template="{StaticResource IconButtonText}" 
+                        Height="25"
+                        Width="100"
+                        Tag="Save"
+                        Content="{icons:MaterialIconExt Kind=ContentSaveAdd}"
+                        Command="{Binding SaveSubTaskCommand}"/>
+                <Button Template="{StaticResource IconButtonText}" 
+                        Style="{StaticResource AddTaskButtonStyle}"
+                        Height="25" 
+                        Width="100" 
+                        Tag="Cancel"
+                        Content="{icons:MaterialIconExt Kind=Cancel}"
+                        Command="{Binding CancelCommand}"/>
+            </UniformGrid>
         </Grid>
     </Border>
 </Window>
