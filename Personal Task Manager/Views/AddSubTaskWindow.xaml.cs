@@ -3,6 +3,7 @@ using Personal_Task_Manager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,24 +22,39 @@ namespace Personal_Task_Manager.Views
     /// </summary>
     public partial class AddSubTaskWindow : Window
     {
-        public AddSubTaskWindow(TaskItemViewModel viewModel) : base()
+        private AddSubTaskItemViewModel SubTaskViewModel { get; }
+        private AddSubTaskWindow() : base()
         {
             Owner = App.Current.MainWindow;
-            DataContext = new AddSubTaskItemViewModel(GetDialogResult);
+            SubTaskViewModel = new AddSubTaskItemViewModel();
+            SubTaskViewModel.CloseEventHandler += CloseWindow;
+            DataContext = SubTaskViewModel;
             InitializeComponent();
         }
 
-        public TaskCheckList SubTask { get; private set; }
-
-        private TaskCheckList GetDialogResult(Boolean isCanceled)
+        private AddSubTaskWindow(TaskCheckList taskCheckList) : this()
         {
-            if (!isCanceled && DataContext is AddSubTaskItemViewModel vm)
-            {
-                SubTask = vm.CreatedSubTask;
-            }
+            SubTaskViewModel.TaskDescription = taskCheckList?.Description ?? String.Empty;
+        }
 
-            DialogResult = !isCanceled;
-            return SubTask;
+        public static Boolean CreateSubTask(out String description)
+        {
+            return EditSubTask(null, out description);
+        }
+
+        public static Boolean EditSubTask(TaskCheckList subTask, out String description)
+        {
+            var window = new AddSubTaskWindow(subTask);
+            var result = window.ShowDialog();
+            description = window.SubTaskViewModel.TaskDescription;
+            return result ?? false;
+        }
+
+        private void CloseWindow(Boolean dialogResult)
+        {
+            SubTaskViewModel.CloseEventHandler -= CloseWindow;
+            DialogResult = dialogResult;
+            this.Close();
         }
     }
 }

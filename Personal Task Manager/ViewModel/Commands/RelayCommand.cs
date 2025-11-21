@@ -13,6 +13,12 @@ namespace Personal_Task_Manager.ViewModel.Commands
             _canExecute = canExecute;
         }
 
+        public RelayCommand(Action execute, Func<bool>? canExecute = null)
+        {
+            _execute = _ => execute();
+            _canExecute = canExecute == null ? _ => true : _ => canExecute();
+        }
+
         public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }

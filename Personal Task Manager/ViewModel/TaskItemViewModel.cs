@@ -1,6 +1,7 @@
 ﻿using Personal_Task_Manager.Models;
 using Personal_Task_Manager.Models.Enums;
 using Personal_Task_Manager.ViewModel.Commands;
+using Personal_Task_Manager.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -17,7 +18,16 @@ namespace Personal_Task_Manager.ViewModel
         {
             _model = taskItem ?? throw new ArgumentNullException(nameof(taskItem));
             OnPropertyChanged(nameof(SubTasks));
-            AddSubTaskCommand = new RelayCommand(_ => AddSubTask());
+            AddSubTaskCommand = new RelayCommand(AddSubTask);
+            EditSubTaskCommand = new RelayCommand(subTask => EditSubTask(subTask));
+            DeleteSubTaskCommand = new RelayCommand<TaskCheckList>(subTask =>
+            {
+                if (subTask != null && _model.SubTasks.Contains(subTask))
+                {
+                    _model.SubTasks.Remove(subTask);
+                    OnPropertyChanged(nameof(SubTasks));
+                }
+            });
         }
         #endregion
 
@@ -126,6 +136,8 @@ namespace Personal_Task_Manager.ViewModel
 
         #region Commands
         public ICommand AddSubTaskCommand { get; }
+        public ICommand EditSubTaskCommand { get; }
+        public ICommand DeleteSubTaskCommand { get; }
 
         #endregion
         #region Methods
@@ -187,14 +199,23 @@ namespace Personal_Task_Manager.ViewModel
             }
         }
 
+        private void EditSubTask(object? subTask)
+        {
+            if (subTask is not TaskCheckList taskCheckListItem)
+                return;
+            var addTaskWindow = AddSubTaskWindow.EditSubTask(taskCheckListItem, out String description);
+            if (addTaskWindow == true)
+            {
+                taskCheckListItem.Description = description;
+                OnPropertyChanged(nameof(SubTasks));
+            }
+        }
+
         private void AddSubTask()
         {
-            //TODO : Implement a dialog to get subtask details from the user
-            var addTaskWindow = new Views.AddSubTaskWindow(this);
-            if (addTaskWindow.ShowDialog() == true)
-            {
-                _model.SubTasks.Add(addTaskWindow.SubTask);
-            }
+            var addTaskWindow = AddSubTaskWindow.CreateSubTask(out String description);
+            if (addTaskWindow == true)
+                _model.SubTasks.Add(new TaskCheckList(description));
             OnPropertyChanged(nameof(SubTasks));
         }
         #endregion
