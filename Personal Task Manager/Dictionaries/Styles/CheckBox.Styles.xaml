@@ -3,7 +3,7 @@
         xmlns:icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF">
 
     <ControlTemplate x:Key="CheckBoxTick" TargetType="{x:Type CheckBox}">
-        <Border CornerRadius="10" Background="Transparent">
+        <Border CornerRadius="10" Background="Transparent" Cursor="Hand" Margin="5 2 10 2" Height="25" Width="25">
             <Grid>
                 <icons:MaterialIcon x:Name="Ticked" Kind="TickCircle" Foreground="Green" Visibility="Visible"/>
                 <icons:MaterialIcon x:Name="NotTicked" Kind="Circle" Foreground="White" Visibility="Collapsed"/>
